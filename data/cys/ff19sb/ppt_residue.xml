@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ForceField>
+  <!-- Custom parameters for PPT-modified serine (cys variant, PCP1)
+  Source: OpenFF Sage 2.3.0, AM1-BCC charges
+  Backbone/CB use ff19SB (amber19/protein.ff19SB.xml).
+  coulomb14scale=0.8333333  lj14scale=0.5
+-->
+  <AtomTypes>
+    <Type name="PPT_CH2" class="PPT_CH2" element="C" mass="12.01100"/>
+    <Type name="PPT_CI6" class="PPT_CI6" element="C" mass="12.01100"/>
+    <Type name="PPT_CL7" class="PPT_CL7" element="C" mass="12.01100"/>
+    <Type name="PPT_CM7" class="PPT_CM7" element="C" mass="12.01100"/>
+    <Type name="PPT_CN7" class="PPT_CN7" element="C" mass="12.01100"/>
+    <Type name="PPT_CO8" class="PPT_CO8" element="C" mass="12.01100"/>
+    <Type name="PPT_CP8" class="PPT_CP8" element="C" mass="12.01100"/>
+    <Type name="PPT_CQ2" class="PPT_CQ2" element="C" mass="12.01100"/>
+    <Type name="PPT_CQ4" class="PPT_CQ4" element="C" mass="12.01100"/>
+    <Type name="PPT_CQ5" class="PPT_CQ5" element="C" mass="12.01100"/>
+    <Type name="PPT_CS8" class="PPT_CS8" element="C" mass="12.01100"/>
+    <Type name="PPT_CT9" class="PPT_CT9" element="C" mass="12.01100"/>
+    <Type name="PPT_CY10" class="PPT_CY10" element="C" mass="12.01100"/>
+    <Type name="PPT_CZ2" class="PPT_CZ2" element="C" mass="12.01100"/>
+    <Type name="PPT_H1A" class="PPT_H1A" element="H" mass="1.00800"/>
+    <Type name="PPT_HF10" class="PPT_HF10" element="H" mass="1.00800"/>
+    <Type name="PPT_HK7" class="PPT_HK7" element="H" mass="1.00800"/>
+    <Type name="PPT_HL72" class="PPT_HL72" element="H" mass="1.00800"/>
+    <Type name="PPT_HL73" class="PPT_HL73" element="H" mass="1.00800"/>
+    <Type name="PPT_HM72" class="PPT_HM72" element="H" mass="1.00800"/>
+    <Type name="PPT_HM73" class="PPT_HM73" element="H" mass="1.00800"/>
+    <Type name="PPT_HO82" class="PPT_HO82" element="H" mass="1.00800"/>
+    <Type name="PPT_HO83" class="PPT_HO83" element="H" mass="1.00800"/>
+    <Type name="PPT_HP82" class="PPT_HP82" element="H" mass="1.00800"/>
+    <Type name="PPT_HP83" class="PPT_HP83" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ2" class="PPT_HQ2" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ41" class="PPT_HQ41" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ42" class="PPT_HQ42" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ43" class="PPT_HQ43" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ51" class="PPT_HQ51" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ52" class="PPT_HQ52" element="H" mass="1.00800"/>
+    <Type name="PPT_HQ53" class="PPT_HQ53" element="H" mass="1.00800"/>
+    <Type name="PPT_HR8" class="PPT_HR8" element="H" mass="1.00800"/>
+    <Type name="PPT_HT9" class="PPT_HT9" element="H" mass="1.00800"/>
+    <Type name="PPT_HX8" class="PPT_HX8" element="H" mass="1.00800"/>
+    <Type name="PPT_HY10" class="PPT_HY10" element="H" mass="1.00800"/>
+    <Type name="PPT_HY11" class="PPT_HY11" element="H" mass="1.00800"/>
+    <Type name="PPT_HY91" class="PPT_HY91" element="H" mass="1.00800"/>
+    <Type name="PPT_HY92" class="PPT_HY92" element="H" mass="1.00800"/>
+    <Type name="PPT_HZ22" class="PPT_HZ22" element="H" mass="1.00800"/>
+    <Type name="PPT_HZ23" class="PPT_HZ23" element="H" mass="1.00800"/>
+    <Type name="PPT_NK7" class="PPT_NK7" element="N" mass="14.00700"/>
+    <Type name="PPT_NR8" class="PPT_NR8" element="N" mass="14.00700"/>
+    <Type name="PPT_NX8" class="PPT_NX8" element="N" mass="14.00700"/>
+    <Type name="PPT_NY9" class="PPT_NY9" element="N" mass="14.00700"/>
+    <Type name="PPT_OE1" class="PPT_OE1" element="O" mass="15.99900"/>
+    <Type name="PPT_OE2" class="PPT_OE2" element="O" mass="15.99900"/>
+    <Type name="PPT_OE3" class="PPT_OE3" element="O" mass="15.99900"/>
+    <Type name="PPT_OG" class="PPT_OG" element="O" mass="15.99900"/>
+    <Type name="PPT_OI2" class="PPT_OI2" element="O" mass="15.99900"/>
+    <Type name="PPT_OK6" class="PPT_OK6" element="O" mass="15.99900"/>
+    <Type name="PPT_OT8" class="PPT_OT8" element="O" mass="15.99900"/>
+    <Type name="PPT_OX7" class="PPT_OX7" element="O" mass="15.99900"/>
+    <Type name="PPT_PD" class="PPT_PD" element="P" mass="30.97400"/>
+    <Type name="PPT_SF10" class="PPT_SF10" element="S" mass="32.06000"/>
+  </AtomTypes>
+  <Residues>
+    <Residue name="PPT">
+      <Atom name="N" type="protein-N" charge="-0.537228"/>
+      <Atom name="H01" type="protein-H" charge="0.311172"/>
+      <Atom name="CA" type="protein-XC" charge="-0.010628"/>
+      <Atom name="HA" type="protein-H1" charge="0.120372"/>
+      <Atom name="C" type="protein-C" charge="0.639772"/>
+      <Atom name="O" type="protein-O" charge="-0.659428"/>
+      <Atom name="CB" type="protein-2C" charge="0.180072"/>
+      <Atom name="HB2" type="protein-H1" charge="0.047372"/>
+      <Atom name="HB3" type="protein-H1" charge="0.047372"/>
+      <Atom name="OG" type="PPT_OG" charge="-0.584528"/>
+      <Atom name="PD" type="PPT_PD" charge="1.443472"/>
+      <Atom name="OE1" type="PPT_OE1" charge="-0.824828"/>
+      <Atom name="OE2" type="PPT_OE2" charge="-0.572528"/>
+      <Atom name="OE3" type="PPT_OE3" charge="-0.824828"/>
+      <Atom name="CZ2" type="PPT_CZ2" charge="0.188072"/>
+      <Atom name="HZ22" type="PPT_HZ22" charge="0.039872"/>
+      <Atom name="HZ23" type="PPT_HZ23" charge="0.039872"/>
+      <Atom name="CH2" type="PPT_CH2" charge="-0.089328"/>
+      <Atom name="CQ4" type="PPT_CQ4" charge="-0.088928"/>
+      <Atom name="HQ41" type="PPT_HQ41" charge="0.041205"/>
+      <Atom name="HQ42" type="PPT_HQ42" charge="0.041205"/>
+      <Atom name="HQ43" type="PPT_HQ43" charge="0.041205"/>
+      <Atom name="CQ5" type="PPT_CQ5" charge="-0.088928"/>
+      <Atom name="HQ51" type="PPT_HQ51" charge="0.041205"/>
+      <Atom name="HQ52" type="PPT_HQ52" charge="0.041205"/>
+      <Atom name="HQ53" type="PPT_HQ53" charge="0.041205"/>
+      <Atom name="CQ2" type="PPT_CQ2" charge="0.075772"/>
+      <Atom name="HQ2" type="PPT_HQ2" charge="0.100372"/>
+      <Atom name="OI2" type="PPT_OI2" charge="-0.596128"/>
+      <Atom name="H1A" type="PPT_H1A" charge="0.405672"/>
+      <Atom name="CI6" type="PPT_CI6" charge="0.613772"/>
+      <Atom name="OK6" type="PPT_OK6" charge="-0.649428"/>
+      <Atom name="NK7" type="PPT_NK7" charge="-0.510228"/>
+      <Atom name="HK7" type="PPT_HK7" charge="0.338172"/>
+      <Atom name="CL7" type="PPT_CL7" charge="0.083672"/>
+      <Atom name="HL72" type="PPT_HL72" charge="0.074872"/>
+      <Atom name="HL73" type="PPT_HL73" charge="0.074872"/>
+      <Atom name="CM7" type="PPT_CM7" charge="-0.166728"/>
+      <Atom name="HM72" type="PPT_HM72" charge="0.078372"/>
+      <Atom name="HM73" type="PPT_HM73" charge="0.078372"/>
+      <Atom name="CN7" type="PPT_CN7" charge="0.664772"/>
+      <Atom name="OX7" type="PPT_OX7" charge="-0.660428"/>
+      <Atom name="NX8" type="PPT_NX8" charge="-0.559228"/>
+      <Atom name="HX8" type="PPT_HX8" charge="0.336172"/>
+      <Atom name="CO8" type="PPT_CO8" charge="0.068672"/>
+      <Atom name="HO82" type="PPT_HO82" charge="0.046372"/>
+      <Atom name="HO83" type="PPT_HO83" charge="0.046372"/>
+      <Atom name="CP8" type="PPT_CP8" charge="0.080672"/>
+      <Atom name="HP82" type="PPT_HP82" charge="0.072372"/>
+      <Atom name="HP83" type="PPT_HP83" charge="0.072372"/>
+      <Atom name="NR8" type="PPT_NR8" charge="-0.540228"/>
+      <Atom name="HR8" type="PPT_HR8" charge="0.324172"/>
+      <Atom name="CS8" type="PPT_CS8" charge="0.598772"/>
+      <Atom name="OT8" type="PPT_OT8" charge="-0.612428"/>
+      <Atom name="CT9" type="PPT_CT9" charge="0.116172"/>
+      <Atom name="HT9" type="PPT_HT9" charge="0.107372"/>
+      <Atom name="NY9" type="PPT_NY9" charge="-0.899128"/>
+      <Atom name="HY91" type="PPT_HY91" charge="0.360972"/>
+      <Atom name="HY92" type="PPT_HY92" charge="0.360972"/>
+      <Atom name="CY10" type="PPT_CY10" charge="0.002372"/>
+      <Atom name="HY10" type="PPT_HY10" charge="0.072872"/>
+      <Atom name="HY11" type="PPT_HY11" charge="0.072872"/>
+      <Atom name="SF10" type="PPT_SF10" charge="-0.347228"/>
+      <Atom name="HF10" type="PPT_HF10" charge="0.189472"/>
+      <Bond atomName1="C" atomName2="CA"/>
+      <Bond atomName1="C" atomName2="O"/>
+      <Bond atomName1="CA" atomName2="CB"/>
+      <Bond atomName1="CA" atomName2="HA"/>
+      <Bond atomName1="CA" atomName2="N"/>
+      <Bond atomName1="CB" atomName2="HB2"/>
+      <Bond atomName1="CB" atomName2="HB3"/>
+      <Bond atomName1="CB" atomName2="OG"/>
+      <Bond atomName1="CH2" atomName2="CQ2"/>
+      <Bond atomName1="CH2" atomName2="CQ4"/>
+      <Bond atomName1="CH2" atomName2="CQ5"/>
+      <Bond atomName1="CH2" atomName2="CZ2"/>
+      <Bond atomName1="CI6" atomName2="CQ2"/>
+      <Bond atomName1="CI6" atomName2="NK7"/>
+      <Bond atomName1="CI6" atomName2="OK6"/>
+      <Bond atomName1="CL7" atomName2="CM7"/>
+      <Bond atomName1="CL7" atomName2="HL72"/>
+      <Bond atomName1="CL7" atomName2="HL73"/>
+      <Bond atomName1="CL7" atomName2="NK7"/>
+      <Bond atomName1="CM7" atomName2="CN7"/>
+      <Bond atomName1="CM7" atomName2="HM72"/>
+      <Bond atomName1="CM7" atomName2="HM73"/>
+      <Bond atomName1="CN7" atomName2="NX8"/>
+      <Bond atomName1="CN7" atomName2="OX7"/>
+      <Bond atomName1="CO8" atomName2="CP8"/>
+      <Bond atomName1="CO8" atomName2="HO82"/>
+      <Bond atomName1="CO8" atomName2="HO83"/>
+      <Bond atomName1="CO8" atomName2="NX8"/>
+      <Bond atomName1="CP8" atomName2="HP82"/>
+      <Bond atomName1="CP8" atomName2="HP83"/>
+      <Bond atomName1="CP8" atomName2="NR8"/>
+      <Bond atomName1="CQ2" atomName2="HQ2"/>
+      <Bond atomName1="CQ2" atomName2="OI2"/>
+      <Bond atomName1="CQ4" atomName2="HQ41"/>
+      <Bond atomName1="CQ4" atomName2="HQ42"/>
+      <Bond atomName1="CQ4" atomName2="HQ43"/>
+      <Bond atomName1="CQ5" atomName2="HQ51"/>
+      <Bond atomName1="CQ5" atomName2="HQ52"/>
+      <Bond atomName1="CQ5" atomName2="HQ53"/>
+      <Bond atomName1="CS8" atomName2="CT9"/>
+      <Bond atomName1="CS8" atomName2="NR8"/>
+      <Bond atomName1="CS8" atomName2="OT8"/>
+      <Bond atomName1="CT9" atomName2="CY10"/>
+      <Bond atomName1="CT9" atomName2="HT9"/>
+      <Bond atomName1="CT9" atomName2="NY9"/>
+      <Bond atomName1="CY10" atomName2="HY10"/>
+      <Bond atomName1="CY10" atomName2="HY11"/>
+      <Bond atomName1="CY10" atomName2="SF10"/>
+      <Bond atomName1="CZ2" atomName2="HZ22"/>
+      <Bond atomName1="CZ2" atomName2="HZ23"/>
+      <Bond atomName1="CZ2" atomName2="OE2"/>
+      <Bond atomName1="H01" atomName2="N"/>
+      <Bond atomName1="H1A" atomName2="OI2"/>
+      <Bond atomName1="HF10" atomName2="SF10"/>
+      <Bond atomName1="HK7" atomName2="NK7"/>
+      <Bond atomName1="HR8" atomName2="NR8"/>
+      <Bond atomName1="HX8" atomName2="NX8"/>
+      <Bond atomName1="HY91" atomName2="NY9"/>
+      <Bond atomName1="HY92" atomName2="NY9"/>
+      <Bond atomName1="OE1" atomName2="PD"/>
+      <Bond atomName1="OE2" atomName2="PD"/>
+      <Bond atomName1="OE3" atomName2="PD"/>
+      <Bond atomName1="OG" atomName2="PD"/>
+      <ExternalBond atomName="N"/>
+      <ExternalBond atomName="C"/>
+    </Residue>
+  </Residues>
+  <HarmonicBondForce>
+    <Bond class1="PPT_CH2" class2="PPT_CQ2" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CH2" class2="PPT_CQ4" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CH2" class2="PPT_CQ5" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CH2" class2="PPT_CZ2" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CI6" class2="PPT_CQ2" length="0.151234" k="200143.3287"/>
+    <Bond class1="PPT_CI6" class2="PPT_NK7" length="0.139767" k="256146.1373"/>
+    <Bond class1="PPT_CI6" class2="PPT_OK6" length="0.123024" k="684269.5759"/>
+    <Bond class1="PPT_CL7" class2="PPT_CM7" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CL7" class2="PPT_HL72" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CL7" class2="PPT_HL73" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CL7" class2="PPT_NK7" length="0.144801" k="236886.7312"/>
+    <Bond class1="PPT_CM7" class2="PPT_CN7" length="0.151234" k="200143.3287"/>
+    <Bond class1="PPT_CM7" class2="PPT_HM72" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CM7" class2="PPT_HM73" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CN7" class2="PPT_NX8" length="0.139767" k="256146.1373"/>
+    <Bond class1="PPT_CN7" class2="PPT_OX7" length="0.123024" k="684269.5759"/>
+    <Bond class1="PPT_CO8" class2="PPT_CP8" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CO8" class2="PPT_HO82" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CO8" class2="PPT_HO83" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CO8" class2="PPT_NX8" length="0.144801" k="236886.7312"/>
+    <Bond class1="PPT_CP8" class2="PPT_HP82" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CP8" class2="PPT_HP83" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CP8" class2="PPT_NR8" length="0.144801" k="236886.7312"/>
+    <Bond class1="PPT_CQ2" class2="PPT_HQ2" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ2" class2="PPT_OI2" length="0.142260" k="164978.7208"/>
+    <Bond class1="PPT_CQ4" class2="PPT_HQ41" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ4" class2="PPT_HQ42" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ4" class2="PPT_HQ43" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ5" class2="PPT_HQ51" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ5" class2="PPT_HQ52" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CQ5" class2="PPT_HQ53" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CS8" class2="PPT_CT9" length="0.151234" k="200143.3287"/>
+    <Bond class1="PPT_CS8" class2="PPT_NR8" length="0.139767" k="256146.1373"/>
+    <Bond class1="PPT_CS8" class2="PPT_OT8" length="0.123024" k="684269.5759"/>
+    <Bond class1="PPT_CT9" class2="PPT_CY10" length="0.152597" k="191596.1630"/>
+    <Bond class1="PPT_CT9" class2="PPT_HT9" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CT9" class2="PPT_NY9" length="0.145600" k="177013.1400"/>
+    <Bond class1="PPT_CY10" class2="PPT_HY10" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CY10" class2="PPT_HY11" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CY10" class2="PPT_SF10" length="0.185449" k="115280.8597"/>
+    <Bond class1="PPT_CZ2" class2="PPT_HZ22" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CZ2" class2="PPT_HZ23" length="0.109245" k="284832.6805"/>
+    <Bond class1="PPT_CZ2" class2="PPT_OE2" length="0.142967" k="221281.4557"/>
+    <Bond class1="PPT_H1A" class2="PPT_OI2" length="0.097116" k="477521.5272"/>
+    <Bond class1="PPT_HF10" class2="PPT_SF10" length="0.136285" k="239804.5785"/>
+    <Bond class1="PPT_HK7" class2="PPT_NK7" length="0.101417" k="412534.9091"/>
+    <Bond class1="PPT_HR8" class2="PPT_NR8" length="0.101417" k="412534.9091"/>
+    <Bond class1="PPT_HX8" class2="PPT_NX8" length="0.101417" k="412534.9091"/>
+    <Bond class1="PPT_HY91" class2="PPT_NY9" length="0.101417" k="412534.9091"/>
+    <Bond class1="PPT_HY92" class2="PPT_NY9" length="0.101417" k="412534.9091"/>
+    <Bond class1="PPT_OE1" class2="PPT_PD" length="0.150952" k="422478.9997"/>
+    <Bond class1="PPT_OE2" class2="PPT_PD" length="0.163346" k="215509.1794"/>
+    <Bond class1="PPT_OE3" class2="PPT_PD" length="0.150952" k="422478.9997"/>
+    <Bond class1="PPT_OG" class2="PPT_PD" length="0.163346" k="215509.1794"/>
+    <Bond class1="PPT_OG" class2="protein-2C" length="0.142967" k="221281.4557"/>
+  </HarmonicBondForce>
+  <HarmonicAngleForce>
+    <Angle class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_CI6" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_HQ2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_OI2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ4" class3="PPT_HQ41" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ4" class3="PPT_HQ42" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ4" class3="PPT_HQ43" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ5" class3="PPT_HQ51" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ5" class3="PPT_HQ52" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CQ5" class3="PPT_HQ53" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CZ2" class3="PPT_HZ22" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CZ2" class3="PPT_HZ23" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CH2" class2="PPT_CZ2" class3="PPT_OE2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_HQ2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_OI2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CI6" class2="PPT_NK7" class3="PPT_CL7" angle="2.078771" k="406.7866"/>
+    <Angle class1="PPT_CI6" class2="PPT_NK7" class3="PPT_HK7" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CL7" class2="PPT_CM7" class3="PPT_CN7" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CL7" class2="PPT_CM7" class3="PPT_HM72" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CL7" class2="PPT_CM7" class3="PPT_HM73" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CL7" class2="PPT_NK7" class3="PPT_HK7" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CM7" class2="PPT_CL7" class3="PPT_HL72" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CM7" class2="PPT_CL7" class3="PPT_HL73" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CM7" class2="PPT_CL7" class3="PPT_NK7" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CM7" class2="PPT_CN7" class3="PPT_NX8" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CM7" class2="PPT_CN7" class3="PPT_OX7" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CN7" class2="PPT_CM7" class3="PPT_HM72" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CN7" class2="PPT_CM7" class3="PPT_HM73" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CN7" class2="PPT_NX8" class3="PPT_CO8" angle="2.078771" k="406.7866"/>
+    <Angle class1="PPT_CN7" class2="PPT_NX8" class3="PPT_HX8" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CO8" class2="PPT_CP8" class3="PPT_HP82" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CO8" class2="PPT_CP8" class3="PPT_HP83" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CO8" class2="PPT_CP8" class3="PPT_NR8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CO8" class2="PPT_NX8" class3="PPT_HX8" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CP8" class2="PPT_CO8" class3="PPT_HO82" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CP8" class2="PPT_CO8" class3="PPT_HO83" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CP8" class2="PPT_CO8" class3="PPT_NX8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CP8" class2="PPT_NR8" class3="PPT_CS8" angle="2.078771" k="406.7866"/>
+    <Angle class1="PPT_CP8" class2="PPT_NR8" class3="PPT_HR8" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ4" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ5" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CZ2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CQ2" class2="PPT_CI6" class3="PPT_NK7" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CQ2" class2="PPT_CI6" class3="PPT_OK6" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CQ2" class2="PPT_OI2" class3="PPT_H1A" angle="1.896782" k="871.6626"/>
+    <Angle class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ5" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CZ2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CZ2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CS8" class2="PPT_CT9" class3="PPT_CY10" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CS8" class2="PPT_CT9" class3="PPT_HT9" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CS8" class2="PPT_CT9" class3="PPT_NY9" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CS8" class2="PPT_NR8" class3="PPT_HR8" angle="2.044678" k="538.1584"/>
+    <Angle class1="PPT_CT9" class2="PPT_CS8" class3="PPT_NR8" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CT9" class2="PPT_CS8" class3="PPT_OT8" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_CT9" class2="PPT_CY10" class3="PPT_HY10" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CT9" class2="PPT_CY10" class3="PPT_HY11" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CT9" class2="PPT_CY10" class3="PPT_SF10" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CT9" class2="PPT_NY9" class3="PPT_HY91" angle="1.927483" k="777.7993"/>
+    <Angle class1="PPT_CT9" class2="PPT_NY9" class3="PPT_HY92" angle="1.927483" k="777.7993"/>
+    <Angle class1="PPT_CY10" class2="PPT_CT9" class3="PPT_HT9" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CY10" class2="PPT_CT9" class3="PPT_NY9" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_CY10" class2="PPT_SF10" class3="PPT_HF10" angle="1.782569" k="1012.1366"/>
+    <Angle class1="PPT_CZ2" class2="PPT_OE2" class3="PPT_PD" angle="2.014908" k="1000.4382"/>
+    <Angle class1="PPT_HL72" class2="PPT_CL7" class3="PPT_HL73" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HL72" class2="PPT_CL7" class3="PPT_NK7" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HL73" class2="PPT_CL7" class3="PPT_NK7" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HM72" class2="PPT_CM7" class3="PPT_HM73" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HO82" class2="PPT_CO8" class3="PPT_HO83" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HO82" class2="PPT_CO8" class3="PPT_NX8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HO83" class2="PPT_CO8" class3="PPT_NX8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HP82" class2="PPT_CP8" class3="PPT_HP83" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HP82" class2="PPT_CP8" class3="PPT_NR8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HP83" class2="PPT_CP8" class3="PPT_NR8" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HQ2" class2="PPT_CQ2" class3="PPT_OI2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HQ41" class2="PPT_CQ4" class3="PPT_HQ42" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HQ41" class2="PPT_CQ4" class3="PPT_HQ43" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HQ42" class2="PPT_CQ4" class3="PPT_HQ43" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HQ51" class2="PPT_CQ5" class3="PPT_HQ52" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HQ51" class2="PPT_CQ5" class3="PPT_HQ53" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HQ52" class2="PPT_CQ5" class3="PPT_HQ53" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HT9" class2="PPT_CT9" class3="PPT_NY9" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HY10" class2="PPT_CY10" class3="PPT_HY11" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HY10" class2="PPT_CY10" class3="PPT_SF10" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HY11" class2="PPT_CY10" class3="PPT_SF10" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HY91" class2="PPT_NY9" class3="PPT_HY92" angle="1.927483" k="777.7993"/>
+    <Angle class1="PPT_HZ22" class2="PPT_CZ2" class3="PPT_HZ23" angle="1.885043" k="164.9831"/>
+    <Angle class1="PPT_HZ22" class2="PPT_CZ2" class3="PPT_OE2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_HZ23" class2="PPT_CZ2" class3="PPT_OE2" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_NK7" class2="PPT_CI6" class3="PPT_OK6" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_NR8" class2="PPT_CS8" class3="PPT_OT8" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_NX8" class2="PPT_CN7" class3="PPT_OX7" angle="2.144832" k="411.4059"/>
+    <Angle class1="PPT_OE1" class2="PPT_PD" class3="PPT_OE2" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OE1" class2="PPT_PD" class3="PPT_OE3" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OE1" class2="PPT_PD" class3="PPT_OG" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OE2" class2="PPT_PD" class3="PPT_OE3" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OE2" class2="PPT_PD" class3="PPT_OG" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OE3" class2="PPT_PD" class3="PPT_OG" angle="1.903973" k="655.7383"/>
+    <Angle class1="PPT_OG" class2="protein-2C" class3="protein-H1" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_OG" class2="protein-2C" class3="protein-XC" angle="1.913763" k="417.1120"/>
+    <Angle class1="PPT_PD" class2="PPT_OG" class3="protein-2C" angle="2.014908" k="1000.4382"/>
+  </HarmonicAngleForce>
+  <PeriodicTorsionForce>
+    <Proper class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_CI6" class4="PPT_NK7" periodicity1="4" k1="-1.412349" phase1="0.000000" periodicity2="2" k2="0.862774" phase2="0.000000"/>
+    <Proper class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_CI6" class4="PPT_OK6" periodicity1="2" k1="-0.387565" phase1="0.000000"/>
+    <Proper class1="PPT_CH2" class2="PPT_CQ2" class3="PPT_OI2" class4="PPT_H1A" periodicity1="3" k1="1.680868" phase1="0.000000" periodicity2="1" k2="1.006299" phase2="0.000000"/>
+    <Proper class1="PPT_CH2" class2="PPT_CZ2" class3="PPT_OE2" class4="PPT_PD" periodicity1="3" k1="1.345650" phase1="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_CH2" class4="PPT_CQ4" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_CH2" class4="PPT_CQ5" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_CH2" class4="PPT_CZ2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_NK7" class4="PPT_OK6" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CI6" class2="PPT_CQ2" class3="PPT_OI2" class4="PPT_H1A" periodicity1="3" k1="1.772559" phase1="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_HK7" class3="PPT_CL7" class4="PPT_NK7" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CI6" class2="PPT_NK7" class3="PPT_CL7" class4="PPT_CM7" periodicity1="4" k1="-0.801835" phase1="3.141593" periodicity2="3" k2="-0.589429" phase2="3.141593" periodicity3="2" k3="1.098397" phase3="0.000000" periodicity4="1" k4="-1.689158" phase4="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_NK7" class3="PPT_CL7" class4="PPT_HL72" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_NK7" class3="PPT_CL7" class4="PPT_HL73" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CI6" class2="PPT_NK7" class3="PPT_OK6" class4="PPT_CQ2" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CI6" class2="PPT_OK6" class3="PPT_CQ2" class4="PPT_NK7" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CL7" class2="PPT_CI6" class3="PPT_HK7" class4="PPT_NK7" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CL7" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_NX8" periodicity1="4" k1="-1.412349" phase1="0.000000" periodicity2="2" k2="0.862774" phase2="0.000000"/>
+    <Proper class1="PPT_CL7" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_OX7" periodicity1="2" k1="-0.387565" phase1="0.000000"/>
+    <Proper class1="PPT_CL7" class2="PPT_NK7" class3="PPT_CI6" class4="PPT_CQ2" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CL7" class2="PPT_NK7" class3="PPT_CI6" class4="PPT_OK6" periodicity1="2" k1="4.645094" phase1="3.141593" periodicity2="1" k2="1.869199" phase2="0.000000"/>
+    <Proper class1="PPT_CM7" class2="PPT_CL7" class3="PPT_NK7" class4="PPT_HK7" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CM7" class2="PPT_CN7" class3="PPT_NX8" class4="PPT_CO8" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CM7" class2="PPT_CN7" class3="PPT_NX8" class4="PPT_HX8" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CM7" class2="PPT_OX7" class3="PPT_NX8" class4="PPT_CN7" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CN7" class2="PPT_CM7" class3="PPT_CL7" class4="PPT_HL72" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_CM7" class3="PPT_CL7" class4="PPT_HL73" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_CM7" class3="PPT_CL7" class4="PPT_NK7" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_CM7" class3="PPT_NX8" class4="PPT_OX7" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CN7" class2="PPT_HX8" class3="PPT_CO8" class4="PPT_NX8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CN7" class2="PPT_NX8" class3="PPT_CO8" class4="PPT_CP8" periodicity1="4" k1="-0.801835" phase1="3.141593" periodicity2="3" k2="-0.589429" phase2="3.141593" periodicity3="2" k3="1.098397" phase3="0.000000" periodicity4="1" k4="-1.689158" phase4="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_NX8" class3="PPT_CO8" class4="PPT_HO82" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_NX8" class3="PPT_CO8" class4="PPT_HO83" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CN7" class2="PPT_OX7" class3="PPT_CM7" class4="PPT_NX8" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CO8" class2="PPT_CN7" class3="PPT_HX8" class4="PPT_NX8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CO8" class2="PPT_CP8" class3="PPT_NR8" class4="PPT_CS8" periodicity1="4" k1="-0.801835" phase1="3.141593" periodicity2="3" k2="-0.589429" phase2="3.141593" periodicity3="2" k3="1.098397" phase3="0.000000" periodicity4="1" k4="-1.689158" phase4="0.000000"/>
+    <Proper class1="PPT_CO8" class2="PPT_CP8" class3="PPT_NR8" class4="PPT_HR8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CO8" class2="PPT_NX8" class3="PPT_CN7" class4="PPT_OX7" periodicity1="2" k1="4.645094" phase1="3.141593" periodicity2="1" k2="1.869199" phase2="0.000000"/>
+    <Proper class1="PPT_CP8" class2="PPT_CO8" class3="PPT_NX8" class4="PPT_HX8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CP8" class2="PPT_HR8" class3="PPT_CS8" class4="PPT_NR8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CP8" class2="PPT_NR8" class3="PPT_CS8" class4="PPT_CT9" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CP8" class2="PPT_NR8" class3="PPT_CS8" class4="PPT_OT8" periodicity1="2" k1="4.645094" phase1="3.141593" periodicity2="1" k2="1.869199" phase2="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ41" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ42" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ43" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ51" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ52" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ53" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ22" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ23" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_OE2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CQ2" class2="PPT_CI6" class3="PPT_NK7" class4="PPT_HK7" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_HQ2" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_OI2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ51" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ52" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ53" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ22" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ23" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ4" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_OE2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_HQ2" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_OI2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ41" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ42" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ43" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ22" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_HZ23" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CQ5" class2="PPT_CH2" class3="PPT_CZ2" class4="PPT_OE2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_CP8" class3="PPT_HR8" class4="PPT_NR8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_HY10" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_HY11" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_SF10" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_NR8" class4="PPT_OT8" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY91" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY92" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_NR8" class3="PPT_CP8" class4="PPT_HP82" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_NR8" class3="PPT_CP8" class4="PPT_HP83" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_CS8" class2="PPT_NR8" class3="PPT_OT8" class4="PPT_CT9" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CS8" class2="PPT_OT8" class3="PPT_CT9" class4="PPT_NR8" periodicity1="2" k1="14.144246" phase1="3.141593"/>
+    <Proper class1="PPT_CT9" class2="PPT_CS8" class3="PPT_NR8" class4="PPT_HR8" periodicity1="2" k1="7.048562" phase1="3.141593" periodicity2="1" k2="5.141292" phase2="0.000000"/>
+    <Proper class1="PPT_CT9" class2="PPT_CY10" class3="PPT_SF10" class4="PPT_HF10" periodicity1="2" k1="2.097399" phase1="3.141593"/>
+    <Proper class1="PPT_CY10" class2="PPT_CT9" class3="PPT_CS8" class4="PPT_NR8" periodicity1="4" k1="-1.412349" phase1="0.000000" periodicity2="2" k2="0.862774" phase2="0.000000"/>
+    <Proper class1="PPT_CY10" class2="PPT_CT9" class3="PPT_CS8" class4="PPT_OT8" periodicity1="2" k1="-0.387565" phase1="0.000000"/>
+    <Proper class1="PPT_CY10" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY91" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_CY10" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY92" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_HQ2" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ2" class4="PPT_OI2" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ41" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ42" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ4" class4="PPT_HQ43" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ51" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ52" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_CH2" class3="PPT_CQ5" class4="PPT_HQ53" periodicity1="3" k1="0.554975" phase1="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_OE2" class3="PPT_PD" class4="PPT_OE1" periodicity1="3" k1="1.765168" phase1="0.000000" periodicity2="1" k2="30.938849" phase2="0.000000" periodicity3="2" k3="-4.215185" phase3="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_OE2" class3="PPT_PD" class4="PPT_OE3" periodicity1="3" k1="1.765168" phase1="0.000000" periodicity2="1" k2="30.938849" phase2="0.000000" periodicity3="2" k3="-4.215185" phase3="0.000000"/>
+    <Proper class1="PPT_CZ2" class2="PPT_OE2" class3="PPT_PD" class4="PPT_OG" periodicity1="3" k1="-1.799394" phase1="0.000000" periodicity2="2" k2="-5.397981" phase2="0.000000" periodicity3="1" k3="29.406670" phase3="0.000000"/>
+    <Proper class1="PPT_H1A" class2="PPT_OI2" class3="PPT_CQ2" class4="PPT_HQ2" periodicity1="3" k1="1.772559" phase1="0.000000"/>
+    <Proper class1="PPT_HF10" class2="PPT_SF10" class3="PPT_CY10" class4="PPT_HY10" periodicity1="3" k1="1.783430" phase1="0.000000"/>
+    <Proper class1="PPT_HF10" class2="PPT_SF10" class3="PPT_CY10" class4="PPT_HY11" periodicity1="3" k1="1.783430" phase1="0.000000"/>
+    <Proper class1="PPT_HK7" class2="PPT_CL7" class3="PPT_CI6" class4="PPT_NK7" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_HK7" class2="PPT_NK7" class3="PPT_CI6" class4="PPT_OK6" periodicity1="2" k1="6.414256" phase1="3.141593" periodicity2="1" k2="6.894055" phase2="0.000000"/>
+    <Proper class1="PPT_HK7" class2="PPT_NK7" class3="PPT_CL7" class4="PPT_HL72" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HK7" class2="PPT_NK7" class3="PPT_CL7" class4="PPT_HL73" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HL72" class2="PPT_CL7" class3="PPT_CM7" class4="PPT_HM72" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HL72" class2="PPT_CL7" class3="PPT_CM7" class4="PPT_HM73" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HL73" class2="PPT_CL7" class3="PPT_CM7" class4="PPT_HM72" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HL73" class2="PPT_CL7" class3="PPT_CM7" class4="PPT_HM73" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HM72" class2="PPT_CM7" class3="PPT_CL7" class4="PPT_NK7" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HM72" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_NX8" periodicity1="3" k1="1.050393" phase1="0.000000"/>
+    <Proper class1="PPT_HM72" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_OX7" periodicity1="1" k1="3.001123" phase1="0.000000" periodicity2="2" k2="2.587579" phase2="0.000000" periodicity3="3" k3="-1.073843" phase3="3.141593"/>
+    <Proper class1="PPT_HM73" class2="PPT_CM7" class3="PPT_CL7" class4="PPT_NK7" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HM73" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_NX8" periodicity1="3" k1="1.050393" phase1="0.000000"/>
+    <Proper class1="PPT_HM73" class2="PPT_CM7" class3="PPT_CN7" class4="PPT_OX7" periodicity1="1" k1="3.001123" phase1="0.000000" periodicity2="2" k2="2.587579" phase2="0.000000" periodicity3="3" k3="-1.073843" phase3="3.141593"/>
+    <Proper class1="PPT_HO82" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_HP82" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HO82" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_HP83" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HO82" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_NR8" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HO82" class2="PPT_CO8" class3="PPT_NX8" class4="PPT_HX8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HO83" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_HP82" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HO83" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_HP83" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HO83" class2="PPT_CO8" class3="PPT_CP8" class4="PPT_NR8" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HO83" class2="PPT_CO8" class3="PPT_NX8" class4="PPT_HX8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HP82" class2="PPT_CP8" class3="PPT_CO8" class4="PPT_NX8" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HP82" class2="PPT_CP8" class3="PPT_NR8" class4="PPT_HR8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HP83" class2="PPT_CP8" class3="PPT_CO8" class4="PPT_NX8" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HP83" class2="PPT_CP8" class3="PPT_NR8" class4="PPT_HR8" periodicity1="2" k1="1.007005" phase1="0.000000" periodicity2="3" k2="1.013131" phase2="0.000000"/>
+    <Proper class1="PPT_HQ2" class2="PPT_CQ2" class3="PPT_CI6" class4="PPT_NK7" periodicity1="3" k1="1.050393" phase1="0.000000"/>
+    <Proper class1="PPT_HQ2" class2="PPT_CQ2" class3="PPT_CI6" class4="PPT_OK6" periodicity1="1" k1="3.001123" phase1="0.000000" periodicity2="2" k2="2.587579" phase2="0.000000" periodicity3="3" k3="-1.073843" phase3="3.141593"/>
+    <Proper class1="PPT_HR8" class2="PPT_CS8" class3="PPT_CP8" class4="PPT_NR8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_HR8" class2="PPT_NR8" class3="PPT_CS8" class4="PPT_OT8" periodicity1="2" k1="6.414256" phase1="3.141593" periodicity2="1" k2="6.894055" phase2="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_CS8" class4="PPT_NR8" periodicity1="3" k1="1.050393" phase1="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_CS8" class4="PPT_OT8" periodicity1="1" k1="3.001123" phase1="0.000000" periodicity2="2" k2="2.587579" phase2="0.000000" periodicity3="3" k3="-1.073843" phase3="3.141593"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_HY10" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_HY11" periodicity1="3" k1="1.000852" phase1="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_SF10" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY91" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_HT9" class2="PPT_CT9" class3="PPT_NY9" class4="PPT_HY92" periodicity1="3" k1="1.378608" phase1="0.000000"/>
+    <Proper class1="PPT_HX8" class2="PPT_CO8" class3="PPT_CN7" class4="PPT_NX8" periodicity1="2" k1="1.052019" phase1="3.141593"/>
+    <Proper class1="PPT_HX8" class2="PPT_NX8" class3="PPT_CN7" class4="PPT_OX7" periodicity1="2" k1="6.414256" phase1="3.141593" periodicity2="1" k2="6.894055" phase2="0.000000"/>
+    <Proper class1="PPT_HY10" class2="PPT_CY10" class3="PPT_CT9" class4="PPT_NY9" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HY11" class2="PPT_CY10" class3="PPT_CT9" class4="PPT_NY9" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_HZ22" class2="PPT_CZ2" class3="PPT_OE2" class4="PPT_PD" periodicity1="3" k1="1.345650" phase1="0.000000"/>
+    <Proper class1="PPT_HZ23" class2="PPT_CZ2" class3="PPT_OE2" class4="PPT_PD" periodicity1="3" k1="1.345650" phase1="0.000000"/>
+    <Proper class1="PPT_NK7" class2="PPT_CI6" class3="PPT_CQ2" class4="PPT_OI2" periodicity1="3" k1="1.050393" phase1="0.000000"/>
+    <Proper class1="PPT_NR8" class2="PPT_CP8" class3="PPT_CO8" class4="PPT_NX8" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_NR8" class2="PPT_CS8" class3="PPT_CT9" class4="PPT_NY9" periodicity1="1" k1="0.856977" phase1="3.141593" periodicity2="2" k2="-0.447986" phase2="3.141593"/>
+    <Proper class1="PPT_NY9" class2="PPT_CT9" class3="PPT_CS8" class4="PPT_OT8" periodicity1="2" k1="-0.387565" phase1="0.000000"/>
+    <Proper class1="PPT_NY9" class2="PPT_CT9" class3="PPT_CY10" class4="PPT_SF10" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_OE1" class2="PPT_PD" class3="PPT_OG" class4="protein-2C" periodicity1="3" k1="1.765168" phase1="0.000000" periodicity2="1" k2="30.938849" phase2="0.000000" periodicity3="2" k3="-4.215185" phase3="0.000000"/>
+    <Proper class1="PPT_OE2" class2="PPT_PD" class3="PPT_OG" class4="protein-2C" periodicity1="3" k1="-1.799394" phase1="0.000000" periodicity2="2" k2="-5.397981" phase2="0.000000" periodicity3="1" k3="29.406670" phase3="0.000000"/>
+    <Proper class1="PPT_OE3" class2="PPT_PD" class3="PPT_OG" class4="protein-2C" periodicity1="3" k1="1.765168" phase1="0.000000" periodicity2="1" k2="30.938849" phase2="0.000000" periodicity3="2" k3="-4.215185" phase3="0.000000"/>
+    <Proper class1="PPT_OG" class2="protein-2C" class3="protein-XC" class4="protein-C" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_OG" class2="protein-2C" class3="protein-XC" class4="protein-H1" periodicity1="3" k1="0.421406" phase1="0.000000" periodicity2="1" k2="1.818018" phase2="0.000000"/>
+    <Proper class1="PPT_OG" class2="protein-2C" class3="protein-XC" class4="protein-N" periodicity1="3" k1="0.658559" phase1="0.000000"/>
+    <Proper class1="PPT_OI2" class2="PPT_CQ2" class3="PPT_CI6" class4="PPT_OK6" periodicity1="2" k1="-0.387565" phase1="0.000000"/>
+    <Proper class1="PPT_PD" class2="PPT_OG" class3="protein-2C" class4="protein-H1" periodicity1="3" k1="1.345650" phase1="0.000000"/>
+    <Proper class1="PPT_PD" class2="PPT_OG" class3="protein-2C" class4="protein-XC" periodicity1="3" k1="1.345650" phase1="0.000000"/>
+  </PeriodicTorsionForce>
+  <NonbondedForce coulomb14scale="0.8333333333" lj14scale="0.5">
+    <Atom type="PPT_CH2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CI6" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CL7" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CM7" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CN7" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CO8" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CP8" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ4" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ5" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CS8" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CT9" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CY10" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CZ2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_H1A" charge="0" sigma="0.0533096" epsilon="0.0000515"/>
+    <Atom type="PPT_HF10" charge="0" sigma="0.1069078" epsilon="0.0656888"/>
+    <Atom type="PPT_HK7" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HL72" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HL73" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HM72" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HM73" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HO82" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HO83" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HP82" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HP83" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HQ2" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HQ41" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ42" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ43" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ51" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ52" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ53" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HR8" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HT9" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HX8" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HY10" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HY11" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HY91" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HY92" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HZ22" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HZ23" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_NK7" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NR8" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NX8" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NY9" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_OE1" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OE2" charge="0" sigma="0.3033377" epsilon="0.3570020"/>
+    <Atom type="PPT_OE3" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OG" charge="0" sigma="0.3033377" epsilon="0.3570020"/>
+    <Atom type="PPT_OI2" charge="0" sigma="0.3023721" epsilon="0.5663499"/>
+    <Atom type="PPT_OK6" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OT8" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OX7" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_PD" charge="0" sigma="0.3741775" epsilon="0.8368000"/>
+    <Atom type="PPT_SF10" charge="0" sigma="0.3563595" epsilon="1.0460000"/>
+  </NonbondedForce>
+</ForceField>
