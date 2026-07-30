@@ -511,60 +511,61 @@
     <Proper class1="PPT_PD" class2="PPT_OG" class3="protein-2C" class4="protein-XC" periodicity1="3" k1="1.345650" phase1="0.000000"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333" lj14scale="0.5">
-    <Atom type="PPT_CH2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CI6" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
-    <Atom type="PPT_CL7" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CM7" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CN7" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
-    <Atom type="PPT_CO8" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CP8" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CQ2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CQ4" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CQ5" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CS8" charge="0" sigma="0.3489032" epsilon="0.4322849"/>
-    <Atom type="PPT_CT9" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CY10" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_CZ2" charge="0" sigma="0.3387971" epsilon="0.5044644"/>
-    <Atom type="PPT_H1A" charge="0" sigma="0.0533096" epsilon="0.0000515"/>
-    <Atom type="PPT_HF10" charge="0" sigma="0.1069078" epsilon="0.0656888"/>
-    <Atom type="PPT_HK7" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
-    <Atom type="PPT_HL72" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HL73" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HM72" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HM73" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HO82" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HO83" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HP82" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HP83" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HQ2" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HQ41" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HQ42" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HQ43" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HQ51" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HQ52" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HQ53" charge="0" sigma="0.2663934" epsilon="0.0559245"/>
-    <Atom type="PPT_HR8" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
-    <Atom type="PPT_HT9" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HX8" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
-    <Atom type="PPT_HY10" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HY11" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HY91" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
-    <Atom type="PPT_HY92" charge="0" sigma="0.1159276" epsilon="0.0580241"/>
-    <Atom type="PPT_HZ22" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_HZ23" charge="0" sigma="0.2558604" epsilon="0.0791612"/>
-    <Atom type="PPT_NK7" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
-    <Atom type="PPT_NR8" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
-    <Atom type="PPT_NX8" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
-    <Atom type="PPT_NY9" charge="0" sigma="0.3288062" epsilon="0.4292594"/>
-    <Atom type="PPT_OE1" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
-    <Atom type="PPT_OE2" charge="0" sigma="0.3033377" epsilon="0.3570020"/>
-    <Atom type="PPT_OE3" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
-    <Atom type="PPT_OG" charge="0" sigma="0.3033377" epsilon="0.3570020"/>
-    <Atom type="PPT_OI2" charge="0" sigma="0.3023721" epsilon="0.5663499"/>
-    <Atom type="PPT_OK6" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
-    <Atom type="PPT_OT8" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
-    <Atom type="PPT_OX7" charge="0" sigma="0.3032496" epsilon="0.9395612"/>
-    <Atom type="PPT_PD" charge="0" sigma="0.3741775" epsilon="0.8368000"/>
-    <Atom type="PPT_SF10" charge="0" sigma="0.3563595" epsilon="1.0460000"/>
+    <UseAttributeFromResidue name="charge"/>
+    <Atom type="PPT_CH2" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CI6" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CL7" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CM7" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CN7" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CO8" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CP8" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ2" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ4" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CQ5" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CS8" sigma="0.3489032" epsilon="0.4322849"/>
+    <Atom type="PPT_CT9" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CY10" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_CZ2" sigma="0.3387971" epsilon="0.5044644"/>
+    <Atom type="PPT_H1A" sigma="0.0533096" epsilon="0.0000515"/>
+    <Atom type="PPT_HF10" sigma="0.1069078" epsilon="0.0656888"/>
+    <Atom type="PPT_HK7" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HL72" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HL73" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HM72" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HM73" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HO82" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HO83" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HP82" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HP83" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HQ2" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HQ41" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ42" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ43" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ51" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ52" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HQ53" sigma="0.2663934" epsilon="0.0559245"/>
+    <Atom type="PPT_HR8" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HT9" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HX8" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HY10" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HY11" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HY91" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HY92" sigma="0.1159276" epsilon="0.0580241"/>
+    <Atom type="PPT_HZ22" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_HZ23" sigma="0.2558604" epsilon="0.0791612"/>
+    <Atom type="PPT_NK7" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NR8" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NX8" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_NY9" sigma="0.3288062" epsilon="0.4292594"/>
+    <Atom type="PPT_OE1" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OE2" sigma="0.3033377" epsilon="0.3570020"/>
+    <Atom type="PPT_OE3" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OG" sigma="0.3033377" epsilon="0.3570020"/>
+    <Atom type="PPT_OI2" sigma="0.3023721" epsilon="0.5663499"/>
+    <Atom type="PPT_OK6" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OT8" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_OX7" sigma="0.3032496" epsilon="0.9395612"/>
+    <Atom type="PPT_PD" sigma="0.3741775" epsilon="0.8368000"/>
+    <Atom type="PPT_SF10" sigma="0.3563595" epsilon="1.0460000"/>
   </NonbondedForce>
 </ForceField>

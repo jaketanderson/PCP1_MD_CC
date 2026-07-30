@@ -509,7 +509,7 @@
     {
       "name": "N",
       "type": "protein-N",
-      "class": "protein-N",
+      "class": "N",
       "element": "N",
       "mass": 14.007,
       "charge": -0.537228,
@@ -518,7 +518,7 @@
     {
       "name": "H01",
       "type": "protein-H",
-      "class": "protein-H",
+      "class": "H",
       "element": "H",
       "mass": 1.008,
       "charge": 0.311172,
@@ -527,7 +527,7 @@
     {
       "name": "CA",
       "type": "protein-CX",
-      "class": "protein-CX",
+      "class": "CX",
       "element": "C",
       "mass": 12.011,
       "charge": -0.010628,
@@ -536,7 +536,7 @@
     {
       "name": "HA",
       "type": "protein-H1",
-      "class": "protein-H1",
+      "class": "H1",
       "element": "H",
       "mass": 1.008,
       "charge": 0.120372,
@@ -545,7 +545,7 @@
     {
       "name": "C",
       "type": "protein-C",
-      "class": "protein-C",
+      "class": "C",
       "element": "C",
       "mass": 12.011,
       "charge": 0.639772,
@@ -554,7 +554,7 @@
     {
       "name": "O",
       "type": "protein-O",
-      "class": "protein-O",
+      "class": "O",
       "element": "O",
       "mass": 15.999,
       "charge": -0.659428,
@@ -563,7 +563,7 @@
     {
       "name": "CB",
       "type": "protein-2C",
-      "class": "protein-2C",
+      "class": "2C",
       "element": "C",
       "mass": 12.011,
       "charge": 0.180072,
@@ -572,7 +572,7 @@
     {
       "name": "HB2",
       "type": "protein-H1",
-      "class": "protein-H1",
+      "class": "H1",
       "element": "H",
       "mass": 1.008,
       "charge": 0.047372,
@@ -581,7 +581,7 @@
     {
       "name": "HB3",
       "type": "protein-H1",
-      "class": "protein-H1",
+      "class": "H1",
       "element": "H",
       "mass": 1.008,
       "charge": 0.047372,
@@ -1338,6 +1338,10 @@
     ]
   ],
   "bonds": {
+    "2C~PPT_OG": {
+      "k": 221281.45570822945,
+      "length": 0.14296657913719998
+    },
     "PPT_CH2~PPT_CQ2": {
       "k": 191596.16303465402,
       "length": 0.1525970013793
@@ -1553,13 +1557,21 @@
     "PPT_OG~PPT_PD": {
       "k": 215509.1794135076,
       "length": 0.16334633569129997
-    },
-    "PPT_OG~protein-2C": {
-      "k": 221281.45570822945,
-      "length": 0.14296657913719998
     }
   },
   "angles": {
+    "2C~PPT_OG~PPT_PD": {
+      "angle": 2.0149084445031473,
+      "k": 1000.4381987990129
+    },
+    "CX~2C~PPT_OG": {
+      "angle": 1.9137632227721684,
+      "k": 417.1119631909894
+    },
+    "H1~2C~PPT_OG": {
+      "angle": 1.9137632227721684,
+      "k": 417.1119631909894
+    },
     "PPT_CH2~PPT_CQ2~PPT_CI6": {
       "angle": 1.9137632227721684,
       "k": 417.1119631909894
@@ -1943,21 +1955,100 @@
     "PPT_OE3~PPT_PD~PPT_OG": {
       "angle": 1.9039729242202146,
       "k": 655.7383009273312
-    },
-    "PPT_OG~protein-2C~protein-CX": {
-      "angle": 1.9137632227721684,
-      "k": 417.1119631909894
-    },
-    "PPT_OG~protein-2C~protein-H1": {
-      "angle": 1.9137632227721684,
-      "k": 417.1119631909894
-    },
-    "PPT_PD~PPT_OG~protein-2C": {
-      "angle": 2.0149084445031473,
-      "k": 1000.4381987990129
     }
   },
   "proper_torsions": {
+    "2C~PPT_OG~PPT_PD~PPT_OE1": [
+      {
+        "periodicity": 3,
+        "k": 1.765167703728224,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 1,
+        "k": 30.93884902833768,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 2,
+        "k": -4.215185430163512,
+        "phase": 0.0
+      }
+    ],
+    "2C~PPT_OG~PPT_PD~PPT_OE2": [
+      {
+        "periodicity": 3,
+        "k": -1.7993935363588194,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 2,
+        "k": -5.397980545541696,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 1,
+        "k": 29.406670212804695,
+        "phase": 0.0
+      }
+    ],
+    "2C~PPT_OG~PPT_PD~PPT_OE3": [
+      {
+        "periodicity": 3,
+        "k": 1.765167703728224,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 1,
+        "k": 30.93884902833768,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 2,
+        "k": -4.215185430163512,
+        "phase": 0.0
+      }
+    ],
+    "C~CX~2C~PPT_OG": [
+      {
+        "periodicity": 3,
+        "k": 0.65855850825412,
+        "phase": 0.0
+      }
+    ],
+    "CX~2C~PPT_OG~PPT_PD": [
+      {
+        "periodicity": 3,
+        "k": 1.3456504553954076,
+        "phase": 0.0
+      }
+    ],
+    "H1~2C~PPT_OG~PPT_PD": [
+      {
+        "periodicity": 3,
+        "k": 1.3456504553954076,
+        "phase": 0.0
+      }
+    ],
+    "H1~CX~2C~PPT_OG": [
+      {
+        "periodicity": 3,
+        "k": 0.4214062547427152,
+        "phase": 0.0
+      },
+      {
+        "periodicity": 1,
+        "k": 1.8180184088155873,
+        "phase": 0.0
+      }
+    ],
+    "N~CX~2C~PPT_OG": [
+      {
+        "periodicity": 3,
+        "k": 0.65855850825412,
+        "phase": 0.0
+      }
+    ],
     "PPT_CH2~PPT_CQ2~PPT_CI6~PPT_NK7": [
       {
         "periodicity": 4,
@@ -3255,101 +3346,10 @@
         "phase": 0.0
       }
     ],
-    "PPT_OE1~PPT_PD~PPT_OG~protein-2C": [
-      {
-        "periodicity": 3,
-        "k": 1.765167703728224,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 1,
-        "k": 30.93884902833768,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 2,
-        "k": -4.215185430163512,
-        "phase": 0.0
-      }
-    ],
-    "PPT_OE2~PPT_PD~PPT_OG~protein-2C": [
-      {
-        "periodicity": 3,
-        "k": -1.7993935363588194,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 2,
-        "k": -5.397980545541696,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 1,
-        "k": 29.406670212804695,
-        "phase": 0.0
-      }
-    ],
-    "PPT_OE3~PPT_PD~PPT_OG~protein-2C": [
-      {
-        "periodicity": 3,
-        "k": 1.765167703728224,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 1,
-        "k": 30.93884902833768,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 2,
-        "k": -4.215185430163512,
-        "phase": 0.0
-      }
-    ],
-    "PPT_OG~protein-2C~protein-CX~protein-C": [
-      {
-        "periodicity": 3,
-        "k": 0.65855850825412,
-        "phase": 0.0
-      }
-    ],
-    "PPT_OG~protein-2C~protein-CX~protein-H1": [
-      {
-        "periodicity": 3,
-        "k": 0.4214062547427152,
-        "phase": 0.0
-      },
-      {
-        "periodicity": 1,
-        "k": 1.8180184088155873,
-        "phase": 0.0
-      }
-    ],
-    "PPT_OG~protein-2C~protein-CX~protein-N": [
-      {
-        "periodicity": 3,
-        "k": 0.65855850825412,
-        "phase": 0.0
-      }
-    ],
     "PPT_OI2~PPT_CQ2~PPT_CI6~PPT_OK6": [
       {
         "periodicity": 2,
         "k": -0.38756520513873755,
-        "phase": 0.0
-      }
-    ],
-    "PPT_PD~PPT_OG~protein-2C~protein-CX": [
-      {
-        "periodicity": 3,
-        "k": 1.3456504553954076,
-        "phase": 0.0
-      }
-    ],
-    "PPT_PD~PPT_OG~protein-2C~protein-H1": [
-      {
-        "periodicity": 3,
-        "k": 1.3456504553954076,
         "phase": 0.0
       }
     ]

@@ -404,7 +404,7 @@
       "class": "protein-N",
       "element": "N",
       "mass": 14.007,
-      "charge": -0.536746,
+      "charge": -0.522554,
       "idx": 0
     },
     {
@@ -413,7 +413,7 @@
       "class": "protein-H",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.344654,
+      "charge": 0.330846,
       "idx": 32
     },
     {
@@ -422,7 +422,7 @@
       "class": "protein-XC",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.011146,
+      "charge": -0.012954,
       "idx": 1
     },
     {
@@ -431,7 +431,7 @@
       "class": "protein-H1",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.107854,
+      "charge": 0.108046,
       "idx": 33
     },
     {
@@ -440,7 +440,7 @@
       "class": "protein-C",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.662254,
+      "charge": 0.663446,
       "idx": 2
     },
     {
@@ -449,7 +449,7 @@
       "class": "protein-O",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.641946,
+      "charge": -0.640754,
       "idx": 3
     },
     {
@@ -458,7 +458,7 @@
       "class": "protein-2C",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.165554,
+      "charge": 0.167746,
       "idx": 4
     },
     {
@@ -467,7 +467,7 @@
       "class": "protein-H1",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.043354,
+      "charge": 0.042546,
       "idx": 34
     },
     {
@@ -476,7 +476,7 @@
       "class": "protein-H1",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.043354,
+      "charge": 0.042546,
       "idx": 35
     },
     {
@@ -485,7 +485,7 @@
       "class": "PPT_OG",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.595046,
+      "charge": -0.593854,
       "idx": 5
     },
     {
@@ -494,7 +494,7 @@
       "class": "PPT_PD",
       "element": "P",
       "mass": 30.974,
-      "charge": 1.435954,
+      "charge": 1.443146,
       "idx": 18
     },
     {
@@ -503,7 +503,7 @@
       "class": "PPT_OE1",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.821346,
+      "charge": -0.821654,
       "idx": 6
     },
     {
@@ -512,7 +512,7 @@
       "class": "PPT_OE2",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.579046,
+      "charge": -0.582854,
       "idx": 7
     },
     {
@@ -521,7 +521,7 @@
       "class": "PPT_OE3",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.821346,
+      "charge": -0.821654,
       "idx": 8
     },
     {
@@ -530,7 +530,7 @@
       "class": "PPT_CZ2",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.183554,
+      "charge": 0.190746,
       "idx": 9
     },
     {
@@ -539,7 +539,7 @@
       "class": "PPT_HZ22",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.043354,
+      "charge": 0.035546,
       "idx": 36
     },
     {
@@ -548,7 +548,7 @@
       "class": "PPT_HZ23",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.043354,
+      "charge": 0.035546,
       "idx": 37
     },
     {
@@ -557,7 +557,7 @@
       "class": "PPT_CH2",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.098846,
+      "charge": -0.097654,
       "idx": 10
     },
     {
@@ -566,7 +566,7 @@
       "class": "PPT_CQ4",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.092446,
+      "charge": -0.082254,
       "idx": 24
     },
     {
@@ -575,7 +575,7 @@
       "class": "PPT_HQ41",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 50
     },
     {
@@ -584,7 +584,7 @@
       "class": "PPT_HQ42",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 51
     },
     {
@@ -593,7 +593,7 @@
       "class": "PPT_HQ43",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 52
     },
     {
@@ -602,7 +602,7 @@
       "class": "PPT_CQ5",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.092446,
+      "charge": -0.082254,
       "idx": 25
     },
     {
@@ -611,7 +611,7 @@
       "class": "PPT_HQ51",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 53
     },
     {
@@ -620,7 +620,7 @@
       "class": "PPT_HQ52",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 54
     },
     {
@@ -629,7 +629,7 @@
       "class": "PPT_HQ53",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.042854,
+      "charge": 0.038546,
       "idx": 55
     },
     {
@@ -638,7 +638,7 @@
       "class": "PPT_CQ2",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.106254,
+      "charge": 0.103446,
       "idx": 23
     },
     {
@@ -647,7 +647,7 @@
       "class": "PPT_HQ2",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.064854,
+      "charge": 0.069046,
       "idx": 49
     },
     {
@@ -656,7 +656,7 @@
       "class": "PPT_OI2",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.635646,
+      "charge": -0.645454,
       "idx": 12
     },
     {
@@ -665,7 +665,7 @@
       "class": "PPT_H1A",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.464154,
+      "charge": 0.480346,
       "idx": 38
     },
     {
@@ -674,7 +674,7 @@
       "class": "PPT_CI6",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.668254,
+      "charge": 0.668446,
       "idx": 11
     },
     {
@@ -683,7 +683,7 @@
       "class": "PPT_OK6",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.655946,
+      "charge": -0.659754,
       "idx": 14
     },
     {
@@ -692,7 +692,7 @@
       "class": "PPT_NK7",
       "element": "N",
       "mass": 14.007,
-      "charge": -0.555746,
+      "charge": -0.553554,
       "idx": 13
     },
     {
@@ -701,7 +701,7 @@
       "class": "PPT_HK7",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.329654,
+      "charge": 0.331846,
       "idx": 39
     },
     {
@@ -710,7 +710,7 @@
       "class": "PPT_CL7",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.093154,
+      "charge": 0.093346,
       "idx": 15
     },
     {
@@ -719,7 +719,7 @@
       "class": "PPT_HL72",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.062354,
+      "charge": 0.061546,
       "idx": 40
     },
     {
@@ -728,7 +728,7 @@
       "class": "PPT_HL73",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.062354,
+      "charge": 0.061546,
       "idx": 41
     },
     {
@@ -737,7 +737,7 @@
       "class": "PPT_CM7",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.184246,
+      "charge": -0.185054,
       "idx": 16
     },
     {
@@ -746,7 +746,7 @@
       "class": "PPT_HM72",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.078854,
+      "charge": 0.079046,
       "idx": 42
     },
     {
@@ -755,7 +755,7 @@
       "class": "PPT_HM73",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.078854,
+      "charge": 0.079046,
       "idx": 43
     },
     {
@@ -764,7 +764,7 @@
       "class": "PPT_CN7",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.658254,
+      "charge": 0.658446,
       "idx": 17
     },
     {
@@ -773,7 +773,7 @@
       "class": "PPT_OX7",
       "element": "O",
       "mass": 15.999,
-      "charge": -0.638946,
+      "charge": -0.640754,
       "idx": 20
     },
     {
@@ -782,7 +782,7 @@
       "class": "PPT_NX8",
       "element": "N",
       "mass": 14.007,
-      "charge": -0.571746,
+      "charge": -0.570554,
       "idx": 19
     },
     {
@@ -791,7 +791,7 @@
       "class": "PPT_HX8",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.349654,
+      "charge": 0.350846,
       "idx": 44
     },
     {
@@ -800,7 +800,7 @@
       "class": "PPT_CO8",
       "element": "C",
       "mass": 12.011,
-      "charge": 0.095154,
+      "charge": 0.096346,
       "idx": 21
     },
     {
@@ -809,7 +809,7 @@
       "class": "PPT_HO82",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.063854,
+      "charge": 0.063046,
       "idx": 45
     },
     {
@@ -818,7 +818,7 @@
       "class": "PPT_HO83",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.063854,
+      "charge": 0.063046,
       "idx": 46
     },
     {
@@ -827,7 +827,7 @@
       "class": "PPT_CP8",
       "element": "C",
       "mass": 12.011,
-      "charge": -0.020146,
+      "charge": -0.019954,
       "idx": 22
     },
     {
@@ -836,7 +836,7 @@
       "class": "PPT_HP82",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.081354,
+      "charge": 0.082046,
       "idx": 47
     },
     {
@@ -845,7 +845,7 @@
       "class": "PPT_HP83",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.081354,
+      "charge": 0.082046,
       "idx": 48
     },
     {
@@ -854,7 +854,7 @@
       "class": "PPT_S01",
       "element": "S",
       "mass": 32.06,
-      "charge": -0.381746,
+      "charge": -0.382554,
       "idx": 26
     },
     {
@@ -863,7 +863,7 @@
       "class": "PPT_H02",
       "element": "H",
       "mass": 1.008,
-      "charge": 0.201954,
+      "charge": 0.201146,
       "idx": 56
     }
   ],

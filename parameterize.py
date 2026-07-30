@@ -67,21 +67,28 @@ DATA_DIR = Path("data")
 _S = Chem.BondType.SINGLE
 _D = Chem.BondType.DOUBLE
 
-# Backbone + CB atom types for each supported protein FF.
+# Backbone + CB atom types for each supported protein FF, as (type, class, mass).
 # Only CA differs: ff14SB uses protein-CX; ff19SB uses protein-XC.
 # Using plain (non-cmap-) type names for the PTM residue means it gets no CMAP
 # while all canonical residues still get their residue-specific CMAPs.
+#
+# NB: type and class names are NOT interchangeable.  amber14/protein.ff14SB.xml
+# declares <Type class="2C" name="protein-2C"/> — bare AMBER classes — whereas
+# amber19/protein.ff19SB.xml declares <Type class="protein-2C" name="protein-2C"/>.
+# Writing class="protein-2C" into an ff14sb XML matches nothing, and OpenMM drops
+# unmatched bonded terms *silently* (this previously dropped the CB–OG bond and
+# every other cross-term at the PPT attachment point under ff14sb).
 PROTEIN_FF_TYPES: dict[str, dict[str, tuple[str, str, float]]] = {
     "ff14sb": {
-        "N":   ("protein-N",  "protein-N",  14.007),
-        "H01": ("protein-H",  "protein-H",   1.008),
-        "CA":  ("protein-CX", "protein-CX", 12.011),
-        "HA":  ("protein-H1", "protein-H1",  1.008),
-        "C":   ("protein-C",  "protein-C",  12.011),
-        "O":   ("protein-O",  "protein-O",  15.999),
-        "CB":  ("protein-2C", "protein-2C", 12.011),
-        "HB2": ("protein-H1", "protein-H1",  1.008),
-        "HB3": ("protein-H1", "protein-H1",  1.008),
+        "N":   ("protein-N",  "N",  14.007),
+        "H01": ("protein-H",  "H",   1.008),
+        "CA":  ("protein-CX", "CX", 12.011),
+        "HA":  ("protein-H1", "H1",  1.008),
+        "C":   ("protein-C",  "C",  12.011),
+        "O":   ("protein-O",  "O",  15.999),
+        "CB":  ("protein-2C", "2C", 12.011),
+        "HB2": ("protein-H1", "H1",  1.008),
+        "HB3": ("protein-H1", "H1",  1.008),
     },
     "ff19sb": {
         "N":   ("protein-N",  "protein-N",  14.007),
@@ -96,6 +103,7 @@ PROTEIN_FF_TYPES: dict[str, dict[str, tuple[str, str, float]]] = {
     },
 }
 PROTEIN_CLASS_NAMES: dict[str, set[str]] = {ff: {v[1] for v in types.values()} for ff, types in PROTEIN_FF_TYPES.items()}
+PROTEIN_TYPE_NAMES:  dict[str, set[str]] = {ff: {v[0] for v in types.values()} for ff, types in PROTEIN_FF_TYPES.items()}
 
 _ELEMENT_MASS: dict[str, float] = {"C": 12.011, "N": 14.007, "O": 15.999, "P": 30.974, "S": 32.06, "H": 1.008}
 
@@ -465,7 +473,7 @@ def _build_index_name_map(mol_with_h: Chem.Mol, cfg: dict[str, Any]) -> dict[int
 def phase1_build_trimer(cfg: dict[str, Any], skip_charges: bool = False) -> tuple[Interchange, dict[int, str]]:
     variant = cfg["name"]
     out_dir = DATA_DIR / variant
-    out_dir.mkdir(exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)   # parents=True: data/ may not exist yet
 
     cache = out_dir / "trimer_interchange.json"
     if skip_charges:
@@ -572,9 +580,11 @@ def phase2_extract_parameters(
         idx_to_type[idx]  = t
         idx_to_class[idx] = c
 
-    protein_class_names = PROTEIN_CLASS_NAMES[ff]
+    # "Borrowed from the protein FF" is a property of the atom's TYPE, so test
+    # against the protein type names — not the class names, which differ for ff14sb.
+    protein_type_names = PROTEIN_TYPE_NAMES[ff]
     new_type_indices = {i for i in ppt_atom_indices
-                        if idx_to_type[i] not in protein_class_names}
+                        if idx_to_type[i] not in protein_type_names}
 
     # add_constrained_forces=True keeps H-X bonds in HarmonicBondForce so their
     # equilibrium lengths are available for extraction and written to ppt_residue.xml.
@@ -670,7 +680,7 @@ def phase2_extract_parameters(
 
     new_type_registry = {
         a["type"]: {"class": a["class"], "element": a["element"], "mass": a["mass"]}
-        for a in residue_atoms if a["type"] not in protein_class_names
+        for a in residue_atoms if a["type"] not in protein_type_names
     }
 
     # Residue bond connectivity from topology (includes H-X bonds)
@@ -808,10 +818,14 @@ def phase3_write_xml(cfg: dict[str, Any], ff: str, params: dict[str, Any] | None
         "coulomb14scale": _fmt(meta["coulomb14scale"], 10),
         "lj14scale":      _fmt(meta["lj14scale"], 1),
     })
+    # Charges must come from the <Residue> template, exactly as AMBER's own XMLs do.
+    # An explicit charge= on these <Atom> elements takes precedence over the residue
+    # attribute in OpenMM, so emitting charge="0" here would zero out every PPT_*
+    # atom — silently neutralizing the whole phosphopantetheine arm.
+    ET.SubElement(nb_force_el, "UseAttributeFromResidue", name="charge")
     for class_name, vdw_params in sorted(vdw.items()):
         ET.SubElement(nb_force_el, "Atom", attrib={
             "type":    class_name,
-            "charge":  "0",
             "sigma":   _fmt(vdw_params["sigma_nm"], 7),
             "epsilon": _fmt(vdw_params["epsilon_kJmol"], 7),
         })
