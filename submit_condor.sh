@@ -136,27 +136,63 @@ if [[ "${1:-}" == "--exec" ]]; then
 
     # getenv=True usually carries the environment over, but be explicit so the
     # job does not depend on how it happened to be submitted.
-    if command -v conda >/dev/null 2>&1; then
-        . "$(conda info --base)/etc/profile.d/conda.sh"
-    else
-        for base in "$HOME/miniconda3" "$HOME/anaconda3" "$HOME/miniforge3" \
-                    "$HOME/mambaforge" /opt/conda; do
-            if [[ -f "$base/etc/profile.d/conda.sh" ]]; then
-                . "$base/etc/profile.d/conda.sh"; break
-            fi
-        done
+    #
+    # Do NOT use `$(conda info --base)` unguarded: a broken conda plugin prints
+    # its load failure to stdout, which ends up substituted in place of the path
+    # (seen on NMRbox with anaconda-anon-usage). Derive the base from $CONDA_EXE
+    # where possible, and otherwise accept only output that is a real directory.
+    conda_base=""
+    if [[ -n "${CONDA_EXE:-}" && -x "${CONDA_EXE:-}" ]]; then
+        conda_base="$(cd "$(dirname "$CONDA_EXE")/.." 2>/dev/null && pwd)"
     fi
+    if [[ ! -f "${conda_base:-}/etc/profile.d/conda.sh" ]] \
+       && command -v conda >/dev/null 2>&1; then
+        # keep only the last line that looks like an absolute path
+        conda_base="$(conda info --base 2>/dev/null \
+                      | tr -d '\r' | awk '/^\//{p=$0} END{print p}')"
+    fi
+
+    conda_sh=""
+    for base in "$conda_base" "$HOME/miniconda3" "$HOME/anaconda3" \
+                "$HOME/miniforge3" "$HOME/mambaforge" /opt/conda; do
+        if [[ -n "$base" && -f "$base/etc/profile.d/conda.sh" ]]; then
+            conda_sh="$base/etc/profile.d/conda.sh"
+            conda_base="$base"
+            break
+        fi
+    done
+    [[ -n "$conda_sh" ]] \
+        || { echo "FATAL: no conda.sh found (CONDA_EXE=${CONDA_EXE:-unset})" >&2; exit 78; }
+
+    # shellcheck disable=SC1090
+    . "$conda_sh"
     conda activate "$CONDA_ENV" \
         || { echo "FATAL: cannot activate conda env '$CONDA_ENV'" >&2; exit 78; }
 
-    cmd=(python simulate.py --state "$state" --ff "$ff" --water "$water"
+    # `conda activate` can report success while leaving PATH untouched if the
+    # shell hook is half-broken, so resolve the interpreter explicitly and fall
+    # back to the env's python directly rather than silently using the wrong one.
+    py="$(command -v python 2>/dev/null || true)"
+    if [[ -z "$py" || -z "${CONDA_PREFIX:-}" || "$py" != "${CONDA_PREFIX:-/nonexistent}"/* ]] \
+       || ! "$py" -c 'import openmm' >/dev/null 2>&1; then
+        py="$conda_base/envs/$CONDA_ENV/bin/python"
+        echo "NOTE: activation did not yield a usable interpreter; using $py" >&2
+    fi
+    if [[ ! -x "$py" ]] || ! "$py" -c 'import openmm' >/dev/null 2>&1; then
+        echo "FATAL: no working python with openmm for env '$CONDA_ENV'" >&2
+        echo "       conda_base=$conda_base  candidate=$py" >&2
+        exit 78
+    fi
+
+    cmd=("$py" simulate.py --state "$state" --ff "$ff" --water "$water"
          --seed "$seed" --workspace-root "$ws_root"
          ${extra_flags[@]+"${extra_flags[@]}"})
     {
         echo ""
         echo "command           = ${cmd[*]}"
-        echo "python            = $(command -v python)"
-        echo "openmm_version    = $(python -c 'import openmm; print(openmm.__version__)' 2>/dev/null || echo '?')"
+        echo "python            = $py"
+        echo "conda_base        = $conda_base"
+        echo "openmm_version    = $("$py" -c 'import openmm; print(openmm.__version__)' 2>/dev/null || echo '?')"
     } >> "$info"
 
     echo "=== ${cmd[*]}"
@@ -183,7 +219,7 @@ if [[ "${1:-}" == "--exec" ]]; then
     if [[ "$runtag" == "test" ]]; then
         echo "=== validating $rundir"
         set +e
-        python - "$rundir" "$state" <<'PYEOF' | tee -a "$info"
+        "$py" - "$rundir" "$state" <<'PYEOF' | tee -a "$info"
 """Validate a finished PCP1 run directory. Exits non-zero on any problem."""
 import sys
 from pathlib import Path
