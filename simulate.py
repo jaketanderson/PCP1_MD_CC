@@ -482,14 +482,32 @@ if deadline is not None:
 
 # Step in checkpoint-sized chunks so progress is never more than one interval
 # ahead of the last durable state.
-while simulation.currentStep < total_steps:
-    chunk = min(checkpoint_interval, total_steps - simulation.currentStep)
-    simulation.step(chunk)
-    write_checkpoint(simulation)
+# Step in reporting-interval slices and test the wall clock after each one.
+# Checking only at checkpoint boundaries would let the budget overshoot by a
+# whole chunk -- with the default 10 ns interval that is 5,000,000 steps, tens
+# of minutes on an L40S, which both risks the 8 h limit and makes a short
+# --max-hours (as used to test requeuing) look like it does nothing at all.
+#
+# Slicing on report_interval also means a deadline checkpoint lands on a frame
+# boundary, so the rollback on resume discards nothing.
+deadline_check_interval = min(report_interval, checkpoint_interval)
+next_checkpoint = ((steps_done // checkpoint_interval) + 1) * checkpoint_interval
 
-    if simulation.currentStep >= total_steps:
+while simulation.currentStep < total_steps:
+    target = min(simulation.currentStep + deadline_check_interval, total_steps)
+    simulation.step(target - simulation.currentStep)
+
+    finished    = simulation.currentStep >= total_steps
+    out_of_time = deadline is not None and time.monotonic() >= deadline
+
+    if finished or out_of_time or simulation.currentStep >= next_checkpoint:
+        write_checkpoint(simulation)
+        while next_checkpoint <= simulation.currentStep:
+            next_checkpoint += checkpoint_interval
+
+    if finished:
         break
-    if deadline is not None and time.monotonic() >= deadline:
+    if out_of_time:
         done_ns = simulation.currentStep * timestep.value_in_unit(unit.nanoseconds)
         elapsed_h = (time.monotonic() - wall_start) / 3600
         print(f"\nWall-clock budget reached after {elapsed_h:.2f} h at "
