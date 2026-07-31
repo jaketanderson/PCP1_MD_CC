@@ -61,8 +61,8 @@ parser.add_argument(
 parser.add_argument(
     "--padding",
     type=float,
-    default=1.0,
-    help="Solvent padding around the solute, in nm (default: 1.0)",
+    default=1.5,
+    help="Solvent padding around the solute, in nm (default: 1.5)",
 )
 parser.add_argument(
     "--ionic-strength",
@@ -403,6 +403,7 @@ else:
         )
         simulation.context.reinitialize(preserveState=True)
 
+        equil_steps = round(equil_time / timestep)
         equil_reporter = app.StateDataReporter(
             str(workspace / "equilibration.log"),
             reportInterval=report_interval,
@@ -410,9 +411,24 @@ else:
             totalEnergy=True, potentialEnergy=True, kineticEnergy=True,
             temperature=True, volume=True, density=True, speed=True,
         )
+        # Equilibration can be long, so mirror production's stdout reporter here:
+        # without it this stage runs silently, with no progress or ETA at all.
+        # currentStep is still 0 at this point (it is reset only after
+        # equilibration), so progress is measured against equil_steps correctly.
+        equil_stdout = app.StateDataReporter(
+            sys.stdout,
+            reportInterval=stdout_interval,
+            step=True, time=True,
+            totalEnergy=True, potentialEnergy=True, kineticEnergy=True,
+            temperature=True, volume=True, density=True, speed=True,
+            totalSteps=equil_steps,
+            progress=True, remainingTime=True,
+        )
         simulation.reporters.append(equil_reporter)
-        simulation.step(round(equil_time / timestep))
+        simulation.reporters.append(equil_stdout)
+        simulation.step(equil_steps)
         simulation.reporters.remove(equil_reporter)
+        simulation.reporters.remove(equil_stdout)
 
         eq_state = simulation.context.getState(getPositions=True)
         box = eq_state.getPeriodicBoxVectors().value_in_unit(unit.nanometer)
