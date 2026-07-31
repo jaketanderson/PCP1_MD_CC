@@ -48,6 +48,10 @@ MAX_RUNNING=4
 MAX_HOURS="6"
 CHECKPOINT_NS="10"
 CHECKPOINT_EXIT_CODE=85
+# Distinct from 85 so the two are distinguishable in the logs: 85 means "work
+# done, checkpointed, continue me"; 86 means "this slot's GPU was unusable,
+# nothing was done, please reschedule".
+GPU_RETRY_EXIT_CODE=86
 
 CONDA_ENV="${CONDA_ENV:-openmm}"
 
@@ -183,6 +187,59 @@ if [[ "${1:-}" == "--exec" ]]; then
         echo "       conda_base=$conda_base  candidate=$py" >&2
         exit 78
     fi
+
+    # Record OpenMM's own installation self-test before anything else. It lists the
+    # platforms actually present on this node and cross-checks their energies
+    # against each other, which characterises a node where CUDA is missing, broken
+    # or disagreeing with the CPU platform -- and it is captured per segment, so a
+    # node that starts misbehaving mid-campaign is visible after the fact.
+    {
+        echo ""
+        echo "# openmm.testInstallation"
+        "$py" -m openmm.testInstallation 2>&1 | sed 's/^/  /' || true
+    } >> "$info"
+
+    # Preflight: can OpenMM actually open a CUDA context on the GPU we were given?
+    #
+    # A slot can hand over a GPU that nvidia-smi queries fine but that cannot be
+    # claimed -- exclusive compute mode with another context already resident, or
+    # a wedged device. Without this check simulate.py dies with exit 1, which does
+    # not match on_exit_remove, so HTCondor drops the job and the replicate is
+    # lost. Detect it in seconds instead and ask to be rescheduled.
+    preflight="$("$py" - <<'PYEOF' 2>&1
+import openmm
+plat = openmm.Platform.getPlatformByName("CUDA")
+s = openmm.System(); s.addParticle(1.0)
+ctx = openmm.Context(s, openmm.VerletIntegrator(0.001), plat, {"Precision": "mixed"})
+print("OK", ctx.getPlatform().getName(),
+      ctx.getPlatform().getPropertyValue(ctx, "DeviceName"))
+PYEOF
+    )" && preflight_rc=0 || preflight_rc=$?
+
+    if [[ ${preflight_rc:-1} -ne 0 ]]; then
+        {
+            echo "cuda_preflight    = FAILED"
+            echo "preflight_error   = ${preflight//$'\n'/ | }"
+            echo "# diagnostics"
+            if command -v nvidia-smi >/dev/null 2>&1; then
+                # compute_mode is the usual culprit: an Exclusive_Process GPU that
+                # already has a context cannot be claimed, even though it queries fine.
+                echo "nvidia_smi_L      = $(nvidia-smi -L 2>/dev/null | paste -sd'; ' -)"
+                echo "compute_mode      = $(nvidia-smi --query-gpu=compute_mode,persistence_mode --format=csv,noheader 2>/dev/null | paste -sd'; ' -)"
+                echo "gpu_processes     = $(nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader 2>/dev/null | paste -sd'; ' -)"
+                echo "ecc_errors        = $(nvidia-smi --query-gpu=ecc.errors.uncorrected.volatile.total --format=csv,noheader 2>/dev/null | paste -sd'; ' -)"
+            else
+                echo "nvidia_smi        = (not on PATH)"
+            fi
+            echo "openmm_platforms  = $("$py" -c 'import openmm;print(", ".join(openmm.Platform.getPlatform(i).getName() for i in range(openmm.Platform.getNumPlatforms())))' 2>&1)"
+            echo "segment_result    = GPU UNAVAILABLE, requeued"
+        } >> "$info"
+        echo "=== CUDA preflight failed on $(hostname -f 2>/dev/null || hostname):" >&2
+        echo "$preflight" >&2
+        echo "=== exiting $GPU_RETRY_EXIT_CODE to be rescheduled" >&2
+        exit "$GPU_RETRY_EXIT_CODE"
+    fi
+    echo "cuda_preflight    = ${preflight}" >> "$info"
 
     cmd=("$py" simulate.py --state "$state" --ff "$ff" --water "$water"
          --seed "$seed" --workspace-root "$ws_root"
@@ -470,11 +527,21 @@ requirements            = (GPUs_Capability >= $GPU_CAPABILITY)
 max_materialize         = $MAX_RUNNING
 
 # Segmented running: simulate.py exits $CHECKPOINT_EXIT_CODE when its wall-clock
-# budget expires with work left, having just checkpointed. Keeping such jobs in
-# the queue makes HTCondor run them again, so a 550 ns replicate proceeds as a
-# chain of sub-8h segments. Any other exit code (0 = finished, anything else =
-# real failure) removes the job, so genuine failures cannot loop forever.
-on_exit_remove          = (ExitCode =!= $CHECKPOINT_EXIT_CODE)
+# budget expires with work left, having just checkpointed, and the wrapper exits
+# $GPU_RETRY_EXIT_CODE when the assigned GPU cannot be used at all. Keeping such
+# jobs in the queue makes HTCondor run them again, so a 550 ns replicate proceeds
+# as a chain of sub-8h segments and a bad GPU costs seconds rather than the whole
+# replicate. Any other exit code (0 = finished, anything else = real failure)
+# removes the job, so genuine failures cannot loop forever.
+on_exit_remove          = (ExitCode =!= $CHECKPOINT_EXIT_CODE) && (ExitCode =!= $GPU_RETRY_EXIT_CODE)
+
+# Record the machines this job has run on, so a retry can be steered away from
+# one that just failed. Left out of requirements deliberately: with few L40S
+# nodes, excluding the previous machine on every checkpoint requeue could starve
+# the job. To avoid a specific bad node, append to requirements above, e.g.
+#   && (TARGET.Machine =!= "lanthanum.nmrbox.org")
+job_machine_attrs       = Machine
+job_machine_attrs_history_length = 4
 
 batch_name              = PCP1-$RUNTAG-$STAMP
 
