@@ -49,7 +49,7 @@ MAX_HOURS="6"
 CHECKPOINT_NS="10"
 CHECKPOINT_EXIT_CODE=85
 
-CONDA_ENV="${CONDA_ENV:-openmm2}"
+CONDA_ENV="${CONDA_ENV:-openmm}"
 
 RUNTIME_NS=""          # empty => simulate.py default (550 ns)
 EQUIL_NS=""            # empty => simulate.py default (1.0 ns)
