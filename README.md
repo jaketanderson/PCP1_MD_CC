@@ -116,7 +116,7 @@ python simulate.py --state holo --ff ff19sb --water opc --seed 1
 | `--seed` | integer | yes | Random seed; also used as the replicate index in the output path |
 | `--runtime-ns` | float | no | Production length override (default 550 ns) |
 | `--equil-ns` | float | no | NPT equilibration length; `0` disables (default 1.0 ns) |
-| `--padding` | float | no | Solvent padding in nm (default 1.0) |
+| `--padding` | float | no | Solvent padding in nm (default 1.5) |
 | `--ionic-strength` | float | no | Background NaCl in molar (default 0.15) |
 | `--checkpoint-ns` | float | no | Checkpoint interval (default 10 ns) |
 | `--max-hours` | float | no | Wall-clock budget per invocation; `0` disables (default 6) |
@@ -127,13 +127,35 @@ python simulate.py --state holo --ff ff19sb --water opc --seed 1
 
 The input PDBs are dry, so `simulate.py` calls `Modeller.addSolvent` with a
 **rhombic dodecahedral** box (~70% the volume of a cube at equal padding),
-1.0 nm padding and 0.15 M NaCl, neutralizing the solute charge on top of the
-background salt. At the defaults every state lands on a 6.17 nm box with
-~4.5k waters (≈14.7k atoms with TIP3P, ≈19.3k with OPC).
+1.5 nm padding and 0.15 M NaCl, neutralizing the solute charge on top of the
+background salt.
+
+The padding is deliberately generous. The phosphopantetheine arm is a long
+flexible chain that can extend well beyond the protein surface, so a tighter box
+risks the arm interacting with its own periodic image. At the defaults:
+
+| State | Water | Box *a* (nm) | Waters | Ions | Atoms |
+|---|---|---|---|---|---|
+| `apo` | TIP3P | 6.67 | 6152 | 36 | 19742 |
+| `apo` | OPC | 6.67 | 6184 | 36 | 26022 |
+| `holo` | TIP3P | 6.67 | 6136 | 37 | 19736 |
+| `holo` | OPC | 6.67 | 6166 | 37 | 25992 |
+| `cys-loaded` | TIP3P | 6.67 | 6123 | 39 | 19709 |
+| `cys-loaded` | OPC | 6.67 | 6155 | 39 | 25960 |
+
+Counts vary by a few waters between runs — `addSolvent` places ions with
+`random.choice`, which is also why a resumed run must never re-solvate (see
+below).
 
 OPC is a 4-point model, so `addSolvent` is given `model='tip4pew'` for the water
-*geometry* while the OPC *parameters* come from the water XML — the M-site
-virtual sites are then created by `createSystem` (one per water).
+*geometry* while the OPC *parameters* come from the water XML. Those waters are
+placed with all four sites, so the M-site is already an atom in the topology
+(6166 × 4 + 1291 solute + 37 ions = 25992 for `holo`); `createSystem` then makes
+it a virtual site. That fourth site is the whole of the ~6.3k atom difference
+between the two water models at the same box size.
+
+At 20 ps per frame a 550 ns replicate is ~27,500 frames: ~6.5 GB with TIP3P and
+~8.6 GB with OPC, so the full 48-replicate matrix is ~360 GB.
 
 ### Simulation protocol
 
