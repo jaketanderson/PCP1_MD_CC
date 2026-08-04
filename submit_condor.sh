@@ -34,14 +34,14 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 STATES=(apo holo cys-loaded)
 FFS=(ff14sb ff19sb)
 WATERS=(tip3p opc)
-SEEDS=(1 2 3 4)
+SEEDS=(1 2 3)
 
 REQUEST_CPUS=2
 REQUEST_MEMORY="2GB"
 REQUEST_DISK="1GB"
 REQUEST_GPUS=1
 GPU_CAPABILITY="8.9"
-MAX_RUNNING=4
+MAX_RUNNING=6
 
 # NMRbox advises against jobs over 8 h, so each invocation runs at most this long
 # then checkpoints and asks to be requeued (see on_exit_remove in the submit file).

@@ -45,13 +45,13 @@ parser.add_argument(
     "--runtime-ns",
     type=float,
     default=None,
-    help="Override simulation runtime in nanoseconds (default: 550 ns)",
+    help="Override simulation runtime in nanoseconds (default: 1050 ns)",
 )
 parser.add_argument(
     "--equil-ns",
     type=float,
-    default=1.0,
-    help="NPT equilibration length in nanoseconds; 0 disables it (default: 1.0)",
+    default=50.0,
+    help="NPT equilibration length in nanoseconds; 0 disables it (default: 50.0)",
 )
 parser.add_argument(
     "--workspace-root",
@@ -61,8 +61,8 @@ parser.add_argument(
 parser.add_argument(
     "--padding",
     type=float,
-    default=1.5,
-    help="Solvent padding around the solute, in nm (default: 1.5)",
+    default=1.1,
+    help="Solvent padding around the solute, in nm (default: 1.1)",
 )
 parser.add_argument(
     "--ionic-strength",
@@ -139,7 +139,7 @@ CHECKPOINT_META = workspace / "checkpoint.json"
 
 # ── Simulation parameters ─────────────────────────────────────────────────────
 timestep    = 2 * unit.femtosecond
-runtime     = (args.runtime_ns if args.runtime_ns is not None else 550) * unit.nanoseconds
+runtime     = (args.runtime_ns if args.runtime_ns is not None else 1050) * unit.nanoseconds
 temperature = 298.15 * unit.kelvin
 
 # NPT equilibration (production itself is NVT)
