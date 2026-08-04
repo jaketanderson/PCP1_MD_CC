@@ -2,10 +2,10 @@
 # ------------------------------------------------------------------
 # Run TorsionDrive + psi4 in parallel using cctools work_queue.
 #
-# Linux version (util-linux `script`). For macOS, use run_macos.sh.
+# macOS version (BSD `script`). For Linux, use run.sh.
 #
 # Usage:
-#   ./run.sh
+#   ./run_macos.sh
 #
 # Requires: torsiondrive, psi4, cctools (work_queue_worker) all on PATH
 # ------------------------------------------------------------------
@@ -47,16 +47,10 @@ echo "Launching TorsionDrive master on port ${WQ_PORT} ..."
 # (a) colored/progress output survives being non-interactive under tee,
 # and (b) the pty doesn't wrap lines at some default/stale width once
 # backgrounded (backgrounded jobs don't get SIGWINCH resize updates).
-#
-# NOTE: this is the Linux (util-linux) `script` calling convention:
-#   script -q -c "command string" /dev/null
-# It only accepts a single command string via -c (not a program + argv
-# list like BSD/macOS script), so we build that string with bash's own
-# quoting instead of passing positional params. See run_macos.sh for
-# the macOS version of this script.
-TD_CMD=$(printf 'stty cols %q rows 50 2>/dev/null; exec torsiondrive-launch %q %q -g %q -e psi4 --wq_port %q -v' \
-    "$PTY_COLS" "$QC_INPUT" "$DIHEDRALS" "$GRID_SPACING" "$WQ_PORT")
-script -q -c "$TD_CMD" /dev/null \
+script -q /dev/null /bin/sh -c '
+    stty cols '"$PTY_COLS"' rows 50 2>/dev/null
+    exec torsiondrive-launch "$1" "$2" -g "$3" -e psi4 --wq_port "$4" -v
+' _ "$QC_INPUT" "$DIHEDRALS" "$GRID_SPACING" "$WQ_PORT" \
     > >(tee "${LOGDIR}/torsiondrive.log") 2>&1 &
 TD_PID=$!
 echo "TorsionDrive master PID: $TD_PID"
