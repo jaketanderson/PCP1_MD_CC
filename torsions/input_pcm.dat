@@ -55,6 +55,23 @@ H -9.833289 15.473435 -27.468372
 set {
   basis          def2-SVP
   scf_type       df
+  pcm            true
+  pcm_scf_type   total
+}
+
+pcm = {
+  Units = Angstrom
+  Medium {
+     SolverType = IEFPCM
+     Solvent = Water
+  }
+  Cavity {
+     RadiiSet = UFF
+     Type = GePol
+     Scaling = True
+     Area = 0.4
+     Mode = Implicit
+  }
 }
 
 gradient('b3lyp-d3bj')
