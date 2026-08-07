@@ -1,0 +1,44 @@
+memory 48 gb
+set_num_threads(10)
+
+molecule {
+0 1
+C 0.0000 -0.5689 0.0000
+C -1.2571 0.2844 0.0000
+C 1.2571 0.2845 0.0000
+H 0.0000 -1.2183 0.8824
+H 0.0000 -1.2183 -0.8824
+H -1.2969 0.9244 0.8873
+H -1.2967 0.9245 -0.8872
+H -2.1475 -0.3520 -0.0001
+H 2.1475 -0.3520 0.0000
+H 1.2968 0.9245 0.8872
+H 1.2968 0.9245 -0.8872
+}
+
+set {
+  basis          def2-SVP
+  scf_type       df
+  dft_spherical_points 302
+  dft_radial_points 75
+  dft_pruning_scheme robust  # According to psi4, "Generally safe and will speed things up"
+  pcm            true
+  pcm_scf_type   total
+}
+
+pcm = {
+  Units = Angstrom
+  Medium {
+     SolverType = IEFPCM
+     Solvent = Water
+  }
+  Cavity {
+     RadiiSet = UFF
+     Type = GePol
+     Scaling = True
+     Area = 0.4
+     Mode = Implicit
+  }
+}
+
+gradient('b3lyp-d3bj')

@@ -1,0 +1,7 @@
+# dihedral definition by atom indices starting from 1
+# propane (PubChem CID 6334 conformer); NOTE atom 1 is the CENTRAL carbon:
+#   1=C(central)  2=C  3=C   4,5=H(C1)   6,7,8=H(C2)   9,10,11=H(C3)
+# The two rotations about the C-C bonds:
+# i     j     k     l
+  3     1     2     6
+  2     1     3     9

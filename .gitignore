@@ -1,5 +1,12 @@
 workspace/
 slurm_logs/
 
+# TorsionDrive run artefacts and Condor bookkeeping (wq.password is a secret).
+# The ** covers both torsions/ itself and subdirs like torsions/test/.
+torsions/**/condor/
+torsions/**/td_logs/
+torsions/**/opt_tmp/
+torsions/**/wq.password
+
 .ipynb_checkpoints/
 __pycache__/
