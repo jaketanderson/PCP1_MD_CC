@@ -71,11 +71,17 @@ echo "Starting ${NUM_WORKERS} work_queue_worker(s), ${THREADS_PER_WORKER} thread
 WORKER_SSL_FLAG=""
 [[ -n "${WQ_SSL:-}" ]] && WORKER_SSL_FLAG="--ssl"
 WORKER_PIDS=()
+# NOTE: --memory and --disk are PER WORKER, not totals for the machine. With
+# NUM_WORKERS=5 in a 244 GB Condor slot each worker gets 244/5 = 48.8 GB, so
+# 48000 is the whole per-worker share. psi4's own `memory` in the input file
+# must sit below it (currently 40 gb), because that keyword bounds psi4's large
+# array allocations rather than the process RSS, and the difference is the
+# overhead. Raising this number does not create memory that the slot lacks.
 for i in $(seq 1 "$NUM_WORKERS"); do
     PSI4_NUM_THREADS="$THREADS_PER_WORKER" \
         work_queue_worker localhost "$WQ_PORT" \
         --cores "$THREADS_PER_WORKER" \
-	--memory 242000 \
+	--memory 48000 \
 	--disk 80000 \
 	-P "$WQ_PASSWORD_FILE" \
 	$WORKER_SSL_FLAG \

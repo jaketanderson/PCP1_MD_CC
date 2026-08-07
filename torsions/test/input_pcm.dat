@@ -1,4 +1,4 @@
-memory 48 gb
+memory 40 gb
 set_num_threads(10)
 
 molecule {
