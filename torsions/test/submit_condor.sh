@@ -210,7 +210,12 @@ if [[ "${1:-}" == "--exec" ]]; then
     # means "owned by me OR on port p", which is every process this user owns --
     # including this job's own shell. -a is what makes it an AND. Do not remove it.
     me="$(id -un)"
-    port_pids() { lsof -t -a -u "$me" -i ":$wq_port" 2>/dev/null | sort -u; }
+    # `|| true`: lsof exits 1 when nothing matches, which is the common case
+    # here (port free). Under set -euo pipefail that propagates through the
+    # pipe and, because this function's result is consumed via a plain
+    # assignment (`stale=$(port_pids | ...)`) rather than inside `[[ ]]`, a
+    # bare 1 here would abort the whole job on the ordinary, nothing-to-do path.
+    port_pids() { lsof -t -a -u "$me" -i ":$wq_port" 2>/dev/null | sort -u || true; }
 
     if [[ $PORT_RECLAIM -eq 1 ]] && command -v lsof >/dev/null 2>&1; then
         stale="$(port_pids | tr '\n' ' ')"
