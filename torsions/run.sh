@@ -13,13 +13,16 @@
 set -euo pipefail
 
 # ---------------- User settings ----------------
-QC_INPUT="input.dat"              # psi4 input template
+QC_INPUT="input_pcm.dat"              # psi4 input template
 DIHEDRALS="dihedrals.txt"     # dihedral definition file
-GRID_SPACING=90               # degrees
+GRID_SPACING=30               # degrees
 WQ_PORT=50124                 # work_queue master port
+WQ_PASSWORD_FILE="$(pwd)/wq.password"
+WQ_SSL=1
+export WQ_PASSWORD_FILE WQ_SSL
 
-TOTAL_CORES=16
-NUM_WORKERS=4                 # number of parallel work_queue_worker processes
+TOTAL_CORES=50
+NUM_WORKERS=5                 # number of parallel work_queue_worker processes
 THREADS_PER_WORKER=$((TOTAL_CORES / NUM_WORKERS))
 # Default split: 4 workers x 4 threads = 16 cores.
 # Adjust NUM_WORKERS (and THREADS_PER_WORKER updates automatically)
@@ -65,11 +68,17 @@ echo "TorsionDrive master PID: $TD_PID"
 sleep 3
 
 echo "Starting ${NUM_WORKERS} work_queue_worker(s), ${THREADS_PER_WORKER} thread(s) each ..."
+WORKER_SSL_FLAG=""
+[[ -n "${WQ_SSL:-}" ]] && WORKER_SSL_FLAG="--ssl"
 WORKER_PIDS=()
 for i in $(seq 1 "$NUM_WORKERS"); do
     PSI4_NUM_THREADS="$THREADS_PER_WORKER" \
         work_queue_worker localhost "$WQ_PORT" \
         --cores "$THREADS_PER_WORKER" \
+	--memory 48000 \
+	--disk 80000 \
+	-P "$WQ_PASSWORD_FILE" \
+	$WORKER_SSL_FLAG \
         > "${LOGDIR}/worker_${i}.log" 2>&1 &
     WORKER_PIDS+=($!)
     LAST_IDX=$((${#WORKER_PIDS[@]} - 1))

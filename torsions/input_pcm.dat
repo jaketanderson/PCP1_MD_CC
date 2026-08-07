@@ -1,4 +1,4 @@
-memory 16 gb
+memory 48 gb
 set_num_threads(10)
 
 molecule {
@@ -55,6 +55,9 @@ H -9.833289 15.473435 -27.468372
 set {
   basis          def2-SVP
   scf_type       df
+  dft_spherical_points 302
+  dft_radial_points 75
+  dft_pruning_scheme robust  # According to psi4, "Generally safe and will speed things up"
   pcm            true
   pcm_scf_type   total
 }

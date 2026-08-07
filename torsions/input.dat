@@ -1,5 +1,5 @@
 memory 16 gb
-set_num_threads(10)
+set_num_threads(6)
 
 molecule {
 -1 1        
