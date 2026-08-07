@@ -75,7 +75,7 @@ for i in $(seq 1 "$NUM_WORKERS"); do
     PSI4_NUM_THREADS="$THREADS_PER_WORKER" \
         work_queue_worker localhost "$WQ_PORT" \
         --cores "$THREADS_PER_WORKER" \
-	--memory 48000 \
+	--memory 242000 \
 	--disk 80000 \
 	-P "$WQ_PASSWORD_FILE" \
 	$WORKER_SSL_FLAG \
