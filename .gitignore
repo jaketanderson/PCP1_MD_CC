@@ -7,6 +7,9 @@ torsions/**/condor/
 torsions/**/td_logs/
 torsions/**/opt_tmp/
 torsions/**/wq.password
+torsions/wq-factory*/
 
 .ipynb_checkpoints/
 __pycache__/
+
+**.tar.gz

@@ -49,10 +49,10 @@ from tqdm import tqdm
 states = ("apo", "holo", "cys-loaded")
 ffs = ("ff14sb", "ff19sb")
 water_models = ("opc", "tip3p")
-replicate_ids = (0, 1, 2, 3)
+replicate_ids = (1, 2, 3)
 
 prefixes = [
-    f"{state}/{ff}/{water_model}"
+    f"../workspace/{state}/{ff}/{water_model}"
     for state in states
     for ff in ffs
     for water_model in water_models
@@ -385,9 +385,9 @@ def _panel(path, size, label, font):
 
 def _encode(frames_dir, out_path, fps):
     subprocess.run(
-        ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps),
+        ["ffmpeg", "-hwaccel", "cuda", "hwaccel_output_format", "cuda", "-y", "-loglevel", "error", "-framerate", str(fps),
          "-i", os.path.join(frames_dir, "frame_%05d.png"),
-         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20",
+         "-c:v", "h264_nvenc", "-pix_fmt", "yuv420p", "-crf", "20",
          "-movflags", "+faststart", out_path],
         check=True,
     )
