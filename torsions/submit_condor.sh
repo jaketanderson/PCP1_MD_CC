@@ -33,15 +33,15 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 # These must stay consistent with TOTAL_CORES / the worker --memory and --disk
 # flags in run.sh: Condor hands out the slot, run.sh decides how to fill it, and
 # nothing reconciles the two automatically.
-REQUEST_CPUS=50
-REQUEST_MEMORY="244GB"
-REQUEST_DISK="100GB"
+REQUEST_CPUS=110
+REQUEST_MEMORY="1700GB"
+REQUEST_DISK="40GB"
 # No request_gpus: psi4 is CPU-only here, and asking for a GPU would restrict
 # this to the handful of GPU nodes for no benefit.
 
 # NMRbox advises against jobs over 8 h, so each segment stops at this budget and
 # requeues rather than running the scan to completion in one slot.
-MAX_HOURS="8"
+MAX_HOURS="96"
 # Subtracted from the budget so TorsionDrive gets SIGTERM, run.sh's cleanup trap
 # tears down the master and workers, and we exit deliberately -- all before the
 # wall-clock limit rather than being killed partway through the teardown.
@@ -359,6 +359,7 @@ initialdir              = $SCRIPT_DIR
 request_cpus            = $REQUEST_CPUS
 request_memory          = $REQUEST_MEMORY
 request_disk            = $REQUEST_DISK
+request_gpus            = 0
 
 # Segmented running: the wrapper exits $REQUEUE_EXIT_CODE when its wall-clock
 # budget expires with grid points left to do. Keeping such a job in the queue
@@ -372,6 +373,7 @@ on_exit_remove          = (ExitCode =!= $REQUEUE_EXIT_CODE)
 #   requirements = (TARGET.Machine =!= "lanthanum.nmrbox.org")
 job_machine_attrs       = Machine
 job_machine_attrs_history_length = 4
++Production=False
 
 batch_name              = PCP1-torsiondrive-$STAMP
 
