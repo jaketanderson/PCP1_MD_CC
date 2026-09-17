@@ -11,7 +11,7 @@ The pipeline is three stages:
   1. extract  - MDAnalysis strips water/ions from production_trimmed.dcd,
                 subsamples every STRIDE frames, repairs periodic wrapping, and
                 superposes every frame of every replicate on one global
-                reference through the low-RMSF core, so all panels share an
+                reference through the core-helix CAs, so all panels share an
                 orientation. Runs in the `openmm2` env (MDAnalysis).
   2. render   - headless PyMOL ray-traces one PNG per frame per replicate. Runs
                 as a subprocess out of the `pymol` env, which is the only env
@@ -49,7 +49,7 @@ from tqdm import tqdm
 states = ("apo", "holo", "cys-loaded")
 ffs = ("ff14sb", "ff19sb")
 water_models = ("opc", "tip3p")
-replicate_ids = (0, 1, 2, 3)
+replicate_ids = (1, 2, 3)
 
 prefixes = [
     f"{state}/{ff}/{water_model}"
@@ -58,8 +58,9 @@ prefixes = [
     for water_model in water_models
 ]
 
-# Matches analysis.py: production_trimmed_static.dcd already has the 50 ns
-# burn-in removed and is aligned on the low-RMSF core, so movie time starts at 0.
+# Matches analysis.py: production_trimmed_static_vacuum.dcd already has the
+# 50 ns burn-in removed and is aligned on the core-helix CAs, so movie time
+# starts at 0.
 REPORT_INTERVAL_PS = 20
 BURN_IN_NS = 50
 
@@ -69,8 +70,10 @@ PANEL_W, PANEL_H = 640, 480
 
 SOLVENT_SEL = "not resname HOH and not resname NA and not resname CL"
 
-# Matches analysis.py: alignment uses the eight lowest-RMSF CA positions.
-N_CORE_RESIDUES = 8
+# Matches analysis.py: alignment uses the alpha carbons of the four largest
+# helices instead of every CA or a per-run RMSF-derived subset. Values are
+# in the state-independent (shared) resid numbering _common_ca produces.
+CORE_HELIX_RESID_RANGES = ((7, 20), (38, 51), (57, 62), (69, 72))
 
 # A Ser CB-OG separation above this (Angstrom) means the phosphopantetheine arm
 # is not covalently held, so the long CB-OG stick is not a real bond.
@@ -87,9 +90,21 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WORKSPACE = os.path.join(os.path.dirname(HERE), "workspace")
 SCRATCH = os.path.join(HERE, ".movie_frames")
 PYMOL_BIN = os.path.expanduser("~/miniconda3/envs/pymol/bin/pymol")
-REFERENCE = "apo/ff14sb/opc/0"   # defines the shared camera and orientation
+REFERENCE = "apo/ff14sb/opc/1"   # defines the shared alignment core
 
 FONT_PATH = "/System/Library/Fonts/Supplemental/Arial.ttf"
+
+# Fixed camera for every panel of every condition, in PyMOL's set_view format.
+# Given directly (rather than computed from `orient`) so the view is
+# reproducible and under manual control.
+VIEW = (
+    -0.438182712,    0.343542576,   -0.830645502,
+    -0.620894790,    0.552532494,    0.556053877,
+     0.649989665,    0.759396672,   -0.028805234,
+     0.000000000,    0.000000000, -129.182952881,
+    36.620151520,   24.174964905,    2.794441223,
+   101.848823547,  156.517089844,  -20.000000000,
+)
 
 
 def condition_labels(path):
@@ -125,11 +140,12 @@ def _load(replicate):
     """Universe over the trimmed trajectory, with solute connectivity.
 
     The trajectory is production_trimmed.dcd rather than the
-    production_trimmed_static.dcd analysis.py writes: the latter was rotated by
-    the alignment while its stored unit cell was not, so its box record no
-    longer describes its coordinates and periodic wrapping cannot be undone in
-    it. Movies therefore start from the un-rotated trimmed trajectory and do
-    their own alignment.
+    production_trimmed_static_vacuum.dcd analysis.py writes: the latter was
+    rotated by the alignment while its stored unit cell was not, so its box
+    record no longer describes its coordinates and periodic wrapping cannot be
+    undone in it (it's also solvent-stripped, which movies doesn't want).
+    Movies therefore start from the un-rotated
+    trimmed trajectory and do their own alignment.
 
     Bonds come from distance-guessing over the minimized structure plus
     whatever CONECT records the PDB carries (the PPT residue's are only in
@@ -180,10 +196,10 @@ def _frames(universe, solute, stride, limit_frames):
 def extract_replicate(replicate, stride, limit_frames, reference):
     """Write a solute-only, subsampled, aligned trajectory for one replicate.
 
-    Each frame is superposed on the global reference through the same low-RMSF
-    core residues analysis.py uses, which removes tumbling while leaving the
-    flexible regions visibly moving, and leaves every replicate of every
-    condition in one shared orientation.
+    Each frame is superposed on the global reference through the same
+    core-helix CAs analysis.py aligns on, which removes tumbling while
+    leaving the flexible regions visibly moving, and leaves every replicate
+    of every condition in one shared orientation.
     """
     import warnings
     warnings.filterwarnings("ignore")
@@ -237,10 +253,10 @@ def extract_replicate(replicate, stride, limit_frames, reference):
 
 def build_reference(stride, limit_frames):
     """Define the shared alignment target: the reference replicate's first
-    frame, plus the residues that fluctuate least across its trajectory.
+    frame, restricted to the alpha carbons of the four largest helices.
 
-    Core residues are picked exactly as analysis.py picks them (the
-    N_CORE_RESIDUES lowest-RMSF CAs), so the movies show the same frame of
+    Core residues are picked exactly as analysis.py picks them (the fixed
+    CORE_HELIX_RESID_RANGES selection), so the movies show the same frame of
     reference the DCC and RMSF results were computed in. One core set is used
     for every replicate and every state, keyed by the state-independent
     residue numbering, so panels stay comparable.
@@ -252,26 +268,18 @@ def build_reference(stride, limit_frames):
     universe, solute = _load(REFERENCE)
     ca, resid_map = _common_ca(universe, state)
     ca_in_solute = [list(solute.indices).index(atom.index) for atom in ca]
-    # Shared resid for each column of the CA stack, in CA-group order.
-    resids = [r for r, _ in sorted(resid_map.items(), key=lambda item: item[1])]
 
-    stack = []
-    for positions in _frames(universe, solute, stride, limit_frames):
-        stack.append(positions[ca_in_solute])
-    stack = np.asarray(stack, dtype=np.float32)
+    first = next(_frames(universe, solute, stride, limit_frames))[ca_in_solute]
 
-    # Fit every frame on the first so the fluctuations measure internal motion
-    # rather than tumbling, then take the least mobile residues as the core.
-    first = stack[0]
-    for i in range(1, len(stack)):
-        rotation, mobile_com, target_com = _superpose(stack[i], first)
-        stack[i] = (stack[i] - mobile_com) @ rotation.T + target_com
-    rmsf = np.sqrt(((stack - stack.mean(axis=0)) ** 2).sum(axis=-1).mean(axis=0))
-    core = np.argsort(rmsf)[:N_CORE_RESIDUES]
+    core_resids = sorted(
+        r for r in resid_map
+        if any(lo <= r <= hi for lo, hi in CORE_HELIX_RESID_RANGES)
+    )
+    core_idx = [resid_map[r] for r in core_resids]
 
     return {
-        "core_resids": [resids[int(i)] for i in sorted(core)],
-        "core_positions": first[sorted(core)].tolist(),
+        "core_resids": core_resids,
+        "core_positions": first[core_idx].tolist(),
     }
 
 
@@ -303,31 +311,6 @@ for state in range(1, n_states + 1):
     cmd.png("{out}/frame_%05d.png" % state, width={width}, height={height}, ray=1)
 python end
 """
-
-
-def compute_view(reference_replicate):
-    """Ray a single frame of the reference with `orient` and capture the camera
-    matrix, so every panel of every condition uses one identical view."""
-    out = scratch_dir(reference_replicate)
-    view_path = os.path.join(SCRATCH, "view.json")
-    script = os.path.join(SCRATCH, "view.pml")
-    with open(script, "w") as handle:
-        handle.write(f"""
-load {out}/solute.pdb, ref
-orient polymer
-# Buffer is generous on purpose: the camera is fixed for the whole run, so the
-# flexible termini must stay in frame across every replicate and every state.
-zoom polymer, 4
-python
-import json
-from pymol import cmd
-json.dump(list(cmd.get_view()), open("{view_path}", "w"))
-python end
-""")
-    subprocess.run([PYMOL_BIN, "-cq", script], check=True,
-                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    with open(view_path) as handle:
-        return json.load(handle)
 
 
 def read_meta(replicate):
@@ -387,8 +370,8 @@ def _encode(frames_dir, out_path, fps):
     subprocess.run(
         ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps),
          "-i", os.path.join(frames_dir, "frame_%05d.png"),
-         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20",
-         "-movflags", "+faststart", out_path],
+         "-c:v", "hevc_videotoolbox", "-q:v", "50", "-pix_fmt", "yuv420p",
+         "-movflags", "+faststart", "-tag:v", "hvc1", out_path],
         check=True,
     )
 
@@ -461,7 +444,7 @@ def encode_overview(active_prefixes, stride, fps):
     grid_w, grid_h = cell_w * cols, cell_h * rows + header
     title_font, panel_font = _font(22), _font(14)
 
-    metas = [read_meta(f"{prefix}/0") for prefix in active_prefixes]
+    metas = [read_meta(f"{prefix}/1") for prefix in active_prefixes]
     n_frames = max(meta["n_frames"] for meta in metas)
 
     composites = os.path.join(SCRATCH, "composite", "overview")
@@ -481,7 +464,7 @@ def encode_overview(active_prefixes, stride, fps):
             if meta["n_frames"] < n_frames:
                 label += " [ended early]"
             panel = _panel(
-                os.path.join(scratch_dir(f"{prefix}/0"), "panels", f"frame_{held_frame:05d}.png"),
+                os.path.join(scratch_dir(f"{prefix}/1"), "panels", f"frame_{held_frame:05d}.png"),
                 (cell_w, cell_h), label, panel_font,
             )
             canvas.paste(panel, ((i % cols) * cell_w, header + (i // cols) * cell_h))
@@ -540,16 +523,8 @@ def main():
         tasks = [(r, args.stride, args.limit_frames, reference) for r in replicates]
         _run("extract", _extract_task, tasks, args.workers)
 
-    # The camera comes from the global reference when it is in play, otherwise
-    # from the first requested condition; either way one view serves every panel
-    # because all replicates were transformed onto the same reference frame.
-    camera_source = REFERENCE
-    if os.path.dirname(REFERENCE) not in args.conditions:
-        camera_source = f"{args.conditions[0]}/0"
-    view = compute_view(camera_source)
-
     if not args.skip_render:
-        _run("render", _render_task, [(r, view) for r in replicates], args.workers)
+        _run("render", _render_task, [(r, VIEW) for r in replicates], args.workers)
 
     outputs = []
     for prefix in tqdm(args.conditions, desc="encode"):
